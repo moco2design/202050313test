@@ -142,6 +142,7 @@ footer {
   content: "";
   background-image: url(../images/common/image_hane-09.svg);
   position: absolute;
+  background-repeat: no-repeat;
   top: 50%;
   left: clamp(25px, 6.6666666667vw, 50px);
   width: clamp(15.62px, 4.1653333333vw, 31.24px);
