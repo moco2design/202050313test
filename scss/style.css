@@ -543,6 +543,11 @@ footer {
   left: 50%;
   transform: translateX(-50%);
 }
+@media (max-width: 600px) {
+  .problem-arrow img {
+    bottom: clamp(-27px, -7.2vw, -54px);
+  }
+}
 
 /* solution */
 .solution--wrap {
@@ -630,6 +635,12 @@ footer {
   width: clamp(350.78px, 93.5413333333vw, 701.56px);
   height: clamp(120px, 32vw, 240px);
   margin-inline: auto;
+  font-feature-settings: "palt";
+}
+@media (max-width: 600px) {
+  .problem-template {
+    width: clamp(353px, 94.1333333333vw, 706px);
+  }
 }
 .problem-template .highlight-yellow {
   font-family: "Noto Sans";

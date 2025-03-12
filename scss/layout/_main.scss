@@ -88,6 +88,10 @@
     bottom: vw(-53);
     left: 50%;
     transform: translateX(-50%);
+
+    @include media(sp) {
+        bottom: vw(-27);
+    }
 }
 
 /* solution */
@@ -179,6 +183,11 @@
     width: vw(350.78);
     height: vw(120);
     margin-inline: auto;
+    font-feature-settings: "palt";
+
+    @include media(sp) {
+        width: vw(353);
+    }
 
     .highlight-yellow {
         font-family: 'Noto Sans';
