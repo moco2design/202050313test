@@ -1,0 +1,29 @@
+.footer {
+    padding: vw(20);
+
+    &-links {
+        display: flex;
+        justify-content: center;
+        gap: vw(20);
+        margin-bottom: vw(10);
+
+        li {
+            list-style: none;
+
+            a {
+                color: #000;
+                font-size: vw(12);
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &-copy {
+        font-size: vw(8);
+        color: #000;
+    }
+}
