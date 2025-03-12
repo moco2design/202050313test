@@ -1180,14 +1180,21 @@ footer {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #fff;
   cursor: pointer;
   z-index: 10;
   border: 0;
+  background-color: transparent;
 }
 .solution--reasons .reason .prev img,
 .solution--reasons .reason .next img {
   width: clamp(14px, 3.7333333333vw, 28px);
+}
+@media (max-width: 600px) {
+  .solution--reasons .reason .prev img,
+  .solution--reasons .reason .next img {
+    width: clamp(20px, 5.3333333333vw, 40px);
+    height: clamp(20px, 5.3333333333vw, 40px);
+  }
 }
 .solution--reasons .reason .prev {
   left: calc(-1 * clamp(20px, 5.3333333333vw, 40px));
@@ -1637,6 +1644,14 @@ footer {
   height: clamp(14px, 3.7333333333vw, 28px);
   cursor: pointer;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.voice-section .swiper-button-prev img,
+.voice-section .swiper-button-next img {
+  width: 100%;
+  height: auto;
 }
 @media (max-width: 600px) {
   .voice-section .swiper-button-prev,
@@ -1645,12 +1660,9 @@ footer {
     height: clamp(20px, 5.3333333333vw, 40px);
   }
 }
-.voice-section .swiper-button-prev img,
-.voice-section .swiper-button-next img {
-  filter: invert(1) brightness(30);
-}
 .voice-section .swiper-button-prev {
   left: clamp(35px, 9.3333333333vw, 70px);
+  top: 50%;
 }
 @media (max-width: 600px) {
   .voice-section .swiper-button-prev {
@@ -1659,7 +1671,7 @@ footer {
 }
 .voice-section .swiper-button-next {
   right: clamp(35px, 9.3333333333vw, 70px);
-  transform: scaleX(-1);
+  transform: translateY(-50%) scaleX(-1);
 }
 @media (max-width: 600px) {
   .voice-section .swiper-button-next {
