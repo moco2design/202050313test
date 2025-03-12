@@ -107,6 +107,12 @@ footer {
   display: block;
 }
 
+/*animation*/
+.char {
+  transform: translateY(100px);
+  transition: transfrom 0.5s;
+}
+
 .footer {
   padding: clamp(20px, 5.3333333333vw, 40px);
 }
@@ -578,9 +584,25 @@ footer {
   font-size: clamp(22px, 5.8666666667vw, 44px);
   font-weight: 700;
   margin-bottom: clamp(10px, 2.6666666667vw, 20px);
-  border-bottom: clamp(2px, 0.5333333333vw, 4px) solid #0577FB;
   max-width: clamp(320px, 85.3333333333vw, 640px);
   margin-inline: auto;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  line-height: 1;
+  display: inline-block;
+  position: relative;
+  padding-bottom: clamp(4px, 1.0666666667vw, 8px);
+  --border-width: 0%;
+}
+.problem-solution::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: var(--border-width);
+  height: clamp(2.5px, 0.6666666667vw, 5px);
+  background-color: #0577FB;
+  transition: width 0.5s ease-in-out;
 }
 .problem-solution .highlight {
   color: #0577FB;

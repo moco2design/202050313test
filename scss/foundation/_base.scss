@@ -87,3 +87,9 @@ footer {
 .is--block {
   display: block;
 }
+
+/*animation*/
+.char {
+  transform: translateY(100px);
+  transition: transfrom 0.5s;
+}

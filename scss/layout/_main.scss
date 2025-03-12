@@ -122,9 +122,27 @@
     font-size: vw(22);
     font-weight: 700;
     margin-bottom: vw(10);
-    border-bottom: vw(2) solid #0577FB;
     max-width: vw(320);
     margin-inline: auto;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    line-height: 1;
+    display: inline-block;
+    position: relative;
+    padding-bottom: vw(4);
+
+    --border-width: 0%;
+
+    // 下線の初期状態
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: var(--border-width);
+        height: vw(2.5);
+        background-color: #0577FB;
+        transition: width 0.5s ease-in-out; // 保険として CSS でも設定
+    }
 
     .highlight {
         color: #0577FB;
