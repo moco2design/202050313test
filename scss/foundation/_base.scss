@@ -10,6 +10,7 @@ body {
   font-family: "Noto Sans", sans-serif;
   color: #333;
   letter-spacing: .05em;
+  overflow-x: hidden;
 }
 
 a {
@@ -64,7 +65,7 @@ footer {
   margin: 0 auto;
   background: #ffffff;
   text-align: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .fz--20 {
