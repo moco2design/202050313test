@@ -577,3 +577,40 @@ document.addEventListener("DOMContentLoaded", function () {
             ease: "power2.out"
         }, "-=0.5"); // `.bottom__first-bg` の閉じる動きと同時に発火
 });
+
+
+// SVG アニメーション
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // SVG の各パス要素を取得
+    const svgPaths = document.querySelectorAll(".svg-message path");
+
+    // 初期設定: stroke-dasharray と stroke-dashoffset を設定
+    gsap.set(svgPaths, {
+        strokeDasharray: (i, target) => target.getTotalLength(),
+        strokeDashoffset: (i, target) => target.getTotalLength(),
+        fill: "transparent"
+    });
+
+    // アニメーション
+    gsap.to(svgPaths, {
+        strokeDashoffset: 0,
+        stagger: 0.2, // 順番に描かれるように
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: ".message-title-en", // **発火するトリガーを指定**
+            start: "top 80%", // 画面の80%に達したら開始
+            toggleActions: "play none none none",
+        },
+        onComplete: () => {
+            // 塗りつぶしを適用
+            gsap.to(".svg-message path", {
+                fill: "rgb(58, 156, 255)",
+                duration: 0.7,
+                ease: "power2.out"
+            });
+        }
+    });
+});
