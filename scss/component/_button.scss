@@ -59,3 +59,29 @@
         }
     }
 }
+
+.puyon {
+    animation: puyon 3s ease-in-out infinite;
+}
+
+@keyframes puyon {
+    0% {
+        transform: scale(1.0);
+    }
+
+    25% {
+        transform: scale(1.03);
+    }
+
+    50% {
+        transform: scale(0.97);
+    }
+
+    75% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}

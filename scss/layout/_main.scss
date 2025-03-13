@@ -128,7 +128,11 @@
     line-height: 1;
     display: inline-block;
     position: relative;
-    padding-bottom: vw(4);
+    padding-bottom: vw(6);
+
+    @include media(sp) {
+        padding-bottom: vw(8);
+    }
 
     --border-width: 0%;
 
@@ -142,6 +146,11 @@
         height: vw(2.5);
         background-color: #0577FB;
         transition: width 0.5s ease-in-out; // 保険として CSS でも設定
+
+        @include media(sp) {
+            height: 2px;
+            bottom: 0;
+        }
     }
 
     .highlight {
@@ -392,7 +401,6 @@
     .solution--emphasis {
         font-size: vw(18);
         font-weight: 700;
-        background: #F8E538;
         display: inline-block;
         padding: vw(2) vw(8);
         color: #000;
@@ -428,8 +436,31 @@
         text-align: center;
 
         &-text {
-            border-bottom: #0577FB 2px solid;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            line-height: 1;
             display: inline-block;
+            position: relative;
+            padding-bottom: vw(6);
+            margin-bottom: vw(6);
+
+            --border-width: 0%;
+
+            // 下線の初期状態
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+                width: var(--border-width);
+                height: vw(2.5);
+                background-color: #0577FB;
+                transition: width 0.5s ease-in-out; // 保険として CSS でも設定
+
+                @include media(sp) {
+                    height: 2px;
+                    bottom: 0;
+                }
+            }
         }
     }
 
@@ -931,6 +962,7 @@
             font-weight: 700;
             margin-top: vw(14);
 
+
             .cta-big {
                 font-family: 'Noto Sans';
                 font-weight: 700;
@@ -939,7 +971,26 @@
                 color: #F8E538;
                 display: inline-block;
                 transform: matrix(1, 0, -0.17, 0.98, 0, 0);
-                border-bottom: vw(2) solid #F8E538;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                line-height: 1;
+                display: inline-block;
+                position: relative;
+                padding-bottom: vw(6);
+                margin-bottom: vw(6);
+
+                --border-width: 0%;
+
+                // 下線の初期状態
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: -2px;
+                    width: var(--border-width);
+                    height: vw(2.5);
+                    background-color: #F8E538;
+                    transition: width 0.5s ease-in-out;
+                }
             }
         }
 
@@ -1168,12 +1219,30 @@
         font-size: vw(16);
         color: #000;
         font-weight: 700;
-        border-bottom: vw(1) solid #000;
         display: inline-block;
         max-width: vw(286);
         padding: 0 vw(5);
         font-feature-settings: "palt";
         white-space: nowrap;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        line-height: 1;
+        position: relative;
+        padding-bottom: vw(6);
+        margin-bottom: vw(6);
+
+        --border-width: 0%;
+
+        // 下線の初期状態
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: var(--border-width);
+            height: vw(2.5);
+            background-color: #000;
+            transition: width 0.5s ease-in-out;
+        }
 
         .highlight {
             color: #0577FB;
@@ -1531,8 +1600,26 @@
                 .profile-name {
                     font-size: vw(24);
                     font-weight: 700;
-                    border-bottom: vw(1) solid #fff;
                     margin-bottom: vw(10);
+                    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                    line-height: 1;
+                    position: relative;
+                    padding-bottom: vw(6);
+                    margin-bottom: vw(6);
+
+                    --border-width: 0%;
+
+                    // 下線の初期状態
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        bottom: -2px;
+                        width: var(--border-width);
+                        height: vw(2.5);
+                        background-color: #fff;
+                        transition: width 0.5s ease-in-out;
+                    }
                 }
 
                 .profile-detail {
@@ -1540,15 +1627,15 @@
                         font-size: vw(14);
                         font-weight: 700;
                         color: #fff;
-                        padding-bottom: vw(6);
-                        margin-bottom: vw(6);
                         display: inline-block;
                         width: 100%;
-                        border-bottom: vw(1) dashed #fff;
 
-                        &:last-child {
-                            border: none;
+                        &.border-dashed {
+                            padding-bottom: vw(6);
+                            margin-bottom: vw(6);
+                            border-bottom: vw(1) dashed #fff;
                         }
+
                     }
 
                 }
@@ -1670,7 +1757,6 @@
             color: #000;
             font-weight: 700;
             margin-bottom: vw(6);
-            background-color: #fff;
             padding: 0 vw(16);
             white-space: nowrap;
             width: fit-content;
@@ -1685,6 +1771,7 @@
 
         .message-text {
             font-size: vw(12);
+            font-weight: 700;
             margin: vw(20) 0;
             text-align: left;
             display: block;
