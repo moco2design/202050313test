@@ -116,6 +116,11 @@
             height: vw(63);
             position: relative;
             top: vw(-15);
+
+            @include media(sp) {
+                width: vw(53.83);
+                height: vw(49.03);
+            }
         }
     }
 }

@@ -233,7 +233,7 @@ gsap.utils.toArray('.js-popUps').forEach(target => {
         y: 0,
         ease: "power3.out",
         stagger: {
-            each: 0.8, // 各要素が 0.2秒間隔で順番に出現
+            each: 0.5, // 各要素が 0.2秒間隔で順番に出現
             from: "start" // **上の要素から順にアニメーション**
         },
         scrollTrigger: {
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
             y: 0, // 下からの移動を元に戻す
             ease: "power3.out",
             duration: 1.2,
-            stagger: 0.3, // 0.3秒ごとに順番に表示
+            stagger: 0.5, // 0.3秒ごとに順番に表示
             scrollTrigger: {
                 trigger: ".js-popUps-move",
                 start: "top 50%", // トップが画面の50%に来たら発火
@@ -341,6 +341,7 @@ gsap.utils.toArray('.js-popUps-soon').forEach(target => {
     }, {
         scale: 1,
         autoAlpha: 1,
+        delay: .2,
         ease: "back.out(1.7)",
         stagger: {
             each: .08
@@ -359,7 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var tl = gsap.timeline({
         scrollTrigger: {
-            trigger: ".bottom__ribbon",
+            trigger: ".text__ribbon",
             start: "top 80%", // `.text__ribbon` が画面の80%に到達したら発火
             toggleActions: "play none none none",
         }
@@ -405,7 +406,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 innerHTML: 0
             }, {
                 innerHTML: target.dataset.count || 2000, // `data-count` 属性の値 or デフォルト2000
-                duration: 1, // カウントアップの時間
+                duration: .5, // カウントアップの時間
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: target,

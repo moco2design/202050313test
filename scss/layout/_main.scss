@@ -1244,7 +1244,11 @@
             transition: width 0.5s ease-in-out;
         }
 
-        .highlight {
+        div:nth-child(9),
+        div:nth-child(10),
+        div:nth-child(11),
+        div:nth-child(12),
+        div:nth-child(13) {
             color: #0577FB;
         }
     }
@@ -1286,6 +1290,262 @@
         margin-top: vw(10);
     }
 }
+
+/*sale*/
+#sale.cta-section {
+    background-color: #fff;
+
+    .price-section {
+        padding: vw(60) vw(15) vw(30);
+        margin-bottom: vw(30);
+        border: vw(2) solid #FC3D40;
+        position: relative;
+
+        .sale-label {
+            background: #FC3D40;
+            color: #fff;
+            font-size: vw(14);
+            font-weight: 700;
+            padding: 0 vw(5);
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .sale-title-wrap {
+            text-align: center;
+            position: relative;
+
+            .sale-title-en {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 700;
+                font-size: vw(80);
+                text-align: center;
+                color: rgba(255, 58, 58, 0.5);
+                opacity: 0.3;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .sale-title {
+                font-family: 'Noto Sans';
+                font-weight: 700;
+                font-size: vw(24);
+                text-align: center;
+                color: #FC3D40;
+                transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+                position: relative;
+                z-index: 10;
+            }
+        }
+
+        .price-sale-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: vw(20) 0;
+            font-feature-settings: "palt";
+        }
+
+        .price-circle {
+            font-size: vw(14);
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url(../images/common/sale-circle.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: vw(98);
+            height: vw(98);
+            font-feature-settings: "palt";
+            line-height: 1;
+
+            .circle-label {
+                font-size: vw(16);
+                position: relative;
+                top: vw(-30);
+                margin-bottom: vw(-30);
+                left: vw(-10);
+            }
+
+            .is--block {
+                position: relative;
+                left: vw(-10);
+                top: vw(-1);
+                margin-bottom: vw(-1);
+            }
+
+            .price {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 700;
+                font-size: vw(40);
+                color: #FFFFFF;
+                display: inline-block;
+                transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+                letter-spacing: .01em;
+                line-height: .98;
+
+                span {
+                    letter-spacing: -0.1em;
+                }
+            }
+
+            .circle-label-bottom {
+                position: relative;
+                top: vw(-4);
+                margin-bottom: vw(-4);
+                left: vw(-10);
+            }
+        }
+
+        .price-nomal {
+            font-size: vw(14);
+            font-weight: 700;
+            color: #000;
+            line-height: 1;
+            margin-bottom: vw(3);
+
+            .price {
+                font-family: 'Roboto';
+                font-weight: 700;
+                font-size: vw(28);
+                letter-spacing: -0.06em;
+                margin-right: vw(5);
+                position: relative;
+                padding: 0 vw(5);
+
+                &::before {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    transform: rotate(10deg);
+                    background-color: #FC3D40;
+                    width: 100%;
+                    height: vw(2);
+                    top: 50%;
+                    left: 0;
+                }
+            }
+
+            .tax {
+                font-size: vw(10);
+            }
+        }
+
+        .price-amount {
+            font-size: vw(16);
+            font-weight: 700;
+            color: #000;
+            white-space: nowrap;
+            line-height: 1;
+
+            .price {
+                font-family: 'Roboto';
+                font-weight: 700;
+                font-size: vw(56);
+                letter-spacing: -0.06em;
+                color: #FC3D40;
+
+                span {
+                    letter-spacing: -0.16em;
+                }
+            }
+
+            .tax {
+                font-size: vw(11);
+            }
+        }
+
+        .price-desc {
+            font-size: vw(16);
+            color: #000;
+            font-weight: 700;
+            display: inline-block;
+            max-width: vw(286);
+            padding: 0 vw(5);
+            font-feature-settings: "palt";
+            white-space: nowrap;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            line-height: 1;
+            position: relative;
+            padding-bottom: vw(6);
+            margin-bottom: vw(17);
+
+            --border-width: 0%;
+
+            // 下線の初期状態
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -1px;
+                width: var(--border-width);
+                height: vw(2.5);
+                background-color: #000;
+                transition: width 0.5s ease-in-out;
+            }
+
+            div:nth-child(9),
+            div:nth-child(10),
+            div:nth-child(11),
+            div:nth-child(12),
+            div:nth-child(13) {
+                color: #FC3D40;
+            }
+
+        }
+    }
+
+    .sales-info {
+        text-align: center;
+
+        .sales-images {
+            text-align: center;
+            width: calc(100% + vw(40));
+            max-width: 750px;
+            margin: 0 vw(-40) vw(6);
+            display: block;
+
+            @include media(sp) {
+                margin: 0 vw(-20) vw(20);
+            }
+
+            img {
+                width: 100%;
+                display: block;
+                max-width: 750px;
+            }
+        }
+
+        .sales-image-desc {
+            font-size: vw(12);
+            color: #FC3D40;
+            font-weight: 700;
+        }
+
+        .btn-cta {
+            width: calc(100% + vw(5));
+            margin: vw(25) vw(-8) 0;
+        }
+
+        .note {
+            font-size: vw(9);
+            text-align: center;
+            margin-top: vw(10);
+        }
+    }
+
+}
+
+/*//common cta-section*/
 
 /*voice*/
 .voice-section {
@@ -1471,6 +1731,7 @@
                 font-weight: 700;
                 color: #0078D4;
                 margin-bottom: vw(12);
+                font-feature-settings: "palt";
             }
 
             .highlight-blue {

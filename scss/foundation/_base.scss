@@ -55,8 +55,61 @@ $scale-factor: 2; // 390pxカンプの数値を2倍にする
 }
 
 
+.wrapper {
+  width: 100%;
+  height: auto;
+  background-image: url(../images/common/image_pcbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  padding: vw(40);
+  position: relative;
+
+  @media screen and (max-width: 1024px) {
+    padding: 0;
+  }
+
+  .wrapper-cta {
+    position: fixed;
+    top: 50%;
+    right: vw(50);
+    transform: translateY(-50%);
+
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
 
 
+    .buy-button {
+      width: vw(80);
+      height: vw(80);
+      background: linear-gradient(180deg, #F9B836 0%, #D49D2D 100%);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: vw(12);
+      font-weight: bold;
+      text-align: center;
+      padding-top: vw(10);
+      line-height: 1.2;
+
+      &::after {
+        content: "";
+        background-image: url(../images/common/btn-right.svg);
+        display: inline-block;
+        width: vw(8);
+        height: vw(16);
+        background-repeat: no-repeat;
+        background-size: contain;
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
 
 
 .container,
