@@ -213,7 +213,7 @@ gsap.utils.toArray('.js-fadeIn').forEach(target => {
         ease: "power3.out", // ふわっとした動き
         scrollTrigger: {
             trigger: target,
-            start: 'top 18%'
+            start: 'top 50%'
         }
     });
 });
