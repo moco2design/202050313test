@@ -75,6 +75,14 @@
             border-left: vw(6) solid transparent;
             border-right: vw(6) solid transparent;
             border-top: vw(10) solid #fff;
+
+            @include media(tab) {
+                bottom: vw(-15);
+            }
+
+            @include media(sp) {
+                bottom: vw(-10);
+            }
         }
     }
 
@@ -130,69 +138,49 @@
     width: vw(375);
     height: vw(208);
     margin-left: calc(-1 * vw(20));
+    display: flex;
+    flex-direction: column;
+    gap: vw(10);
 }
 
-.scroll-infinity {
+.loop-wrapper {
+    display: flex;
+    gap: 0;
     width: 100%;
-    height: vw(54);
     overflow: hidden;
-    position: relative;
+
+    img {
+        max-height: vw(54);
+    }
 }
 
-.scroll-infinity_wrap {
-    display: flex;
-    width: max-content;
+.loop_right {
+    animation: loop_animation_right 10s linear infinite;
+    white-space: nowrap;
 }
 
-.scroll-infinity_list {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+@keyframes loop_animation_right {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
-.scroll-infinity_item {
-    flex: 0 0 vw(390);
-    height: vw(54);
-    padding-bottom: vw(10);
-    padding-right: vw(10);
+.loop_left {
+    animation: loop_animation_left 10s linear infinite;
+    white-space: nowrap;
 }
 
-.scroll-infinity_item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 左方向へのスクロールアニメーション */
-.scroll-infinity_list-left {
-    animation: scroll-left 30s linear infinite;
-}
-
-@keyframes scroll-left {
-    from {
+@keyframes loop_animation_left {
+    0% {
         transform: translateX(0);
     }
 
-    to {
-        transform: translateX(-160vw);
-        /* 画像4枚 × 40vw */
-    }
-}
-
-/* 右方向へのスクロールアニメーション */
-.scroll-infinity_list-right {
-    animation: scroll-right 30s linear infinite;
-}
-
-@keyframes scroll-right {
-    from {
-        transform: translateX(-160vw);
-        /* 画像4枚 × 40vw */
-    }
-
-    to {
-        transform: translateX(0);
+    100% {
+        transform: translateX(-100%);
     }
 }
 

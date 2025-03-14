@@ -835,6 +835,16 @@
         .carousel-slide {
             min-width: 100%;
 
+            p {
+                display: block;
+                background-color: #0577FB;
+                padding: vw(1) vw(12);
+                color: #fff;
+                width: 100%;
+                font-size: vw(14);
+                font-weight: 700;
+            }
+
             img {
                 width: 100%;
             }

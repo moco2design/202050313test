@@ -213,7 +213,7 @@ gsap.utils.toArray('.js-fadeIn').forEach(target => {
         ease: "power3.out", // ふわっとした動き
         scrollTrigger: {
             trigger: target,
-            start: 'top 50%'
+            start: 'top 18%'
         }
     });
 });
@@ -487,7 +487,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// 右からフェードイン
+// 右・左からフェードイン
 document.addEventListener("DOMContentLoaded", function () {
     gsap.utils.toArray(".fadeInRight").forEach(function (element) {
         gsap.to(element, {
@@ -518,6 +518,42 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+// 下からフェードイン
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.utils.toArray(".fadeInUp").forEach(function (element) {
+        gsap.to(element, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: element,
+                start: "top 90%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+
+    // `.grid-container` 内の `.fadeInUp` を順番にアニメーション
+    gsap.to(".grid-container .fadeInUp", {
+        opacity: 1,
+        y: 0,
+        ease: "power3.out",
+        duration: 1,
+        stagger: {
+            each: 0.4,
+            from: "start",
+            grid: "auto"
+        },
+        scrollTrigger: {
+            trigger: ".grid-container",
+            start: "top 90%",
+            toggleActions: "play none none none"
+        }
+    });
+});
+
 
 
 //帯アニメーション③

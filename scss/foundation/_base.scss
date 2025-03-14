@@ -187,6 +187,10 @@ footer {
   opacity: 0;
 }
 
+.fadeInUp {
+  transform: translateY(20px);
+}
+
 .text__ribbon {
   position: relative;
   display: inline-block;
