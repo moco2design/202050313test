@@ -1866,6 +1866,10 @@ footer {
 .sales-info .swiper-wrapper {
   transition-timing-function: linear;
 }
+.sales-info .swiper-slide {
+  width: 120% !important;
+  height: auto !important;
+}
 .sales-info .swiper-slide img {
   height: auto;
   width: 100%;
@@ -2115,7 +2119,7 @@ footer {
 }
 @media (max-width: 600px) {
   #sale.cta-section .sales-info .sales-images {
-    margin: 0 clamp(-20px, -5.3333333333vw, -40px) clamp(20px, 5.3333333333vw, 40px);
+    margin: 0 clamp(-20px, -5.3333333333vw, -40px) clamp(6px, 1.6vw, 12px);
   }
 }
 #sale.cta-section .sales-info .sales-images img {

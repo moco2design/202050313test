@@ -1302,6 +1302,11 @@
         transition-timing-function: linear;
     }
 
+    .swiper-slide {
+        width: 120% !important;
+        height: auto !important;
+    }
+
     .swiper-slide img {
         height: auto;
         width: 100%;
@@ -1575,7 +1580,7 @@
             display: block;
 
             @include media(sp) {
-                margin: 0 vw(-20) vw(20);
+                margin: 0 vw(-20) vw(6);
             }
 
             img {
