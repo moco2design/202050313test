@@ -1,103 +1,59 @@
-//reason-carousel
+// swiper-reason
 document.addEventListener("DOMContentLoaded", function () {
-    const carousels = document.querySelectorAll(".carousel-container");
-
-    carousels.forEach((carousel) => {
-        const carouselId = carousel.getAttribute("data-carousel"); // 各カルーセルのIDを取得
-        const track = carousel.querySelector(".carousel-track");
-        const slides = carousel.querySelectorAll(".carousel-slide");
-        const prevBtn = carousel.querySelector(".prev");
-        const nextBtn = carousel.querySelector(".next");
-        const indicatorContainer = document.querySelector(`.carousel-indicators[data-carousel="${carouselId}"]`);
-        const dots = indicatorContainer ? indicatorContainer.querySelectorAll(".dot") : [];
-
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-        let isDragging = false;
-        let startPos = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID;
-
-        function updateCarousel() {
-            const offset = -currentIndex * 100;
-            track.style.transition = "transform 0.3s ease-in-out";
-            track.style.transform = `translateX(${offset}%)`;
-
-            if (dots.length > 0) {
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle("active", index === currentIndex);
-                });
-            }
-        }
-
-        function moveSlide(direction) {
-            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        nextBtn.addEventListener("click", () => moveSlide(1));
-        prevBtn.addEventListener("click", () => moveSlide(-1));
-
-        if (dots.length > 0) {
-            dots.forEach((dot, index) => {
-                dot.addEventListener("click", () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
-            });
-        }
-
-        // **フリック・スワイプ操作対応**
-        function touchStart(event) {
-            isDragging = true;
-            startPos = event.touches ? event.touches[0].clientX : event.clientX;
-            prevTranslate = currentTranslate;
-            animationID = requestAnimationFrame(animation);
-            track.style.transition = "none";
-        }
-
-        function touchMove(event) {
-            if (!isDragging) return;
-            const currentPosition = event.touches ? event.touches[0].clientX : event.clientX;
-            currentTranslate = prevTranslate + currentPosition - startPos;
-            track.style.transform = `translateX(${currentTranslate}px)`;
-        }
-
-        function touchEnd() {
-            cancelAnimationFrame(animationID);
-            isDragging = false;
-
-            const movedBy = currentTranslate - prevTranslate;
-
-            if (movedBy < -50) {
-                moveSlide(1);
-            } else if (movedBy > 50) {
-                moveSlide(-1);
-            } else {
-                updateCarousel();
-            }
-        }
-
-        function animation() {
-            if (isDragging) {
-                requestAnimationFrame(animation);
-            }
-        }
-
-        track.addEventListener("touchstart", touchStart);
-        track.addEventListener("touchmove", touchMove);
-        track.addEventListener("touchend", touchEnd);
-        track.addEventListener("mousedown", touchStart);
-        track.addEventListener("mousemove", touchMove);
-        track.addEventListener("mouseup", touchEnd);
-        track.addEventListener("mouseleave", touchEnd);
-
-        updateCarousel(); // 初期表示を更新
+    const swiperReason = new Swiper(".swiper-reason", {
+        loop: true, // ループ有効
+        speed: 1500, // スライド速度（ミリ秒）
+        autoplay: false,
+        pagination: {
+            el: ".swiper-reason-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
     });
+
+    console.log("Swiper initialized:", swiperReason);
 });
 
+// swiper-reason02
+document.addEventListener("DOMContentLoaded", function () {
+    const swiperReason = new Swiper(".swiper-reason02", {
+        loop: true, // ループ有効
+        speed: 1500, // スライド速度（ミリ秒）
+        autoplay: false,
+        pagination: {
+            el: ".swiper-reason02-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
 
+    console.log("Swiper initialized:", swiperReason);
+});
+
+// swiper-reason03
+document.addEventListener("DOMContentLoaded", function () {
+    const swiperReason = new Swiper(".swiper-reason03", {
+        loop: true, // ループ有効
+        speed: 1500, // スライド速度（ミリ秒）
+        autoplay: false,
+        pagination: {
+            el: ".swiper-reason03-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    console.log("Swiper initialized:", swiperReason);
+});
 
 //voice-carousel
 document.addEventListener("DOMContentLoaded", function () {
@@ -119,25 +75,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //FAQ
-document.addEventListener("DOMContentLoaded", function () {
+window.onload = function () {
     const faqItems = document.querySelectorAll(".faq-item");
 
     faqItems.forEach(item => {
         const question = item.querySelector(".faq-question");
 
         question.addEventListener("click", function () {
-            // 他のFAQを閉じる
             faqItems.forEach(otherItem => {
                 if (otherItem !== item) {
                     otherItem.classList.remove("active");
                 }
             });
 
-            // 現在のFAQを開閉する
             item.classList.toggle("active");
         });
     });
-});
+};
+
 
 // SplitType & GSAP アニメーション
 document.addEventListener("DOMContentLoaded", function () {
@@ -233,7 +188,7 @@ gsap.utils.toArray('.js-popUps').forEach(target => {
         y: 0,
         ease: "power3.out",
         stagger: {
-            each: 0.5, // 各要素が 0.2秒間隔で順番に出現
+            each: 0.3, // 各要素が 0.2秒間隔で順番に出現
             from: "start" // **上の要素から順にアニメーション**
         },
         scrollTrigger: {
@@ -322,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
             y: 0, // 下からの移動を元に戻す
             ease: "power3.out",
             duration: 1.2,
-            stagger: 0.5, // 0.3秒ごとに順番に表示
+            stagger: 0.3, // 0.3秒ごとに順番に表示
             scrollTrigger: {
                 trigger: ".js-popUps-move",
                 start: "top 50%", // トップが画面の50%に来たら発火
@@ -406,7 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 innerHTML: 0
             }, {
                 innerHTML: target.dataset.count || 2000, // `data-count` 属性の値 or デフォルト2000
-                duration: .5, // カウントアップの時間
+                duration: 1, // カウントアップの時間
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: target,
@@ -535,23 +490,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // `.grid-container` 内の `.fadeInUp` を順番にアニメーション
-    gsap.to(".grid-container .fadeInUp", {
-        opacity: 1,
-        y: 0,
-        ease: "power3.out",
-        duration: 1,
-        stagger: {
-            each: 0.4,
-            from: "start",
-            grid: "auto"
-        },
-        scrollTrigger: {
-            trigger: ".grid-container",
-            start: "top 90%",
-            toggleActions: "play none none none"
-        }
-    });
 });
 
 

@@ -4,7 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>テンプレ集プロモーション</title>
+    <title>【最強テンプレ集】プロ級の資料を簡単作成！</title>
+    <!-- SEO -->
+    <meta name="description" content="東大卒パワポ資料インフルエンサー監修! 累計3000枚以上の資料作成経験を活かした最強のスライドテンプレ集。コピペでプロ級の資料が完成!">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="【最強テンプレ集】プロ級の資料を簡単作成！">
+    <meta property="og:description" content="東大卒パワポ資料インフルエンサー監修のスライドテンプレ集。時間を節約しながら、わかりやすく説得力のある資料を作成できます！">
+    <meta property="og:image" content="og-image.png">
+    <meta property="og:url" content=""><!-- 後ほど入力 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="【最強テンプレ集】プロ級の資料を簡単作成！">
+    <meta name="twitter:description" content="パワポ資料のクオリティを爆上げ！">
+    <meta name="twitter:image" content="og-image.png">
+    <!-- /SEO -->
+
     <link rel="stylesheet" href="scss/style.css">
     <link rel="stylesheet" href="lib/swiper/swiper-bundle.min.css">
     <!-- Google Fonts -->
@@ -16,6 +29,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- /GSAP -->
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "スライドテンプレ集",
+            "image": "ogp.png",
+            "description": "資料作成のプロが監修した最強のスライドテンプレ集。時間を節約しながらプロ級の資料が作れる！",
+            "brand": {
+                "@type": "Brand",
+                "name": "EmoCri"
+            },
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "JPY",
+                "price": "15000",
+                "availability": "https://schema.org/InStock",
+                "url": "" //後ほど入力
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -191,7 +225,7 @@
                         資料作成を武器にできてからは
                     </p>
                     <p class="solution--highlight">
-                        <span class="is--block js-fadeIn">「営業成績UP</span>
+                        <span class="is--block js-fadeIn">「営業成績UP」</span>
                         <span class="is--block js-fadeIn">「部長職への昇進」</span>
                         <span class="is--block js-fadeIn">「残業時間の大幅削減」</span>
                     </p>
@@ -339,34 +373,44 @@
                         </div>
                     </div>
                     <!-- carousel -->
-                    <div class="carousel-container" data-carousel="1">
-                        <div class="carousel">
-                            <div class="carousel-track">
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason1.png" alt="Slide 1"></div>
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason2.png" alt="Slide 2"></div>
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason3.png" alt="Slide 3"></div>
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason4.png" alt="Slide 4"></div>
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason5.png" alt="Slide 5"></div>
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason6.png" alt="Slide 6"></div>
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason7.png" alt="Slide 7"></div>
-                                <div class="carousel-slide"><img src="images/reason/1/image_reason8.png" alt="Slide 8"></div>
+                    <div class="carousel-container">
+                        <div class="swiper-reason">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason1.png" alt="Slide 1">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason2.png" alt="Slide 2">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason3.png" alt="Slide 3">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason4.png" alt="Slide 4">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason5.png" alt="Slide 5">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason6.png" alt="Slide 6">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason7.png" alt="Slide 7">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/1/image_reason8.png" alt="Slide 8">
+                                </div>
                             </div>
                         </div>
-
-                        <!-- Next / Prev ボタンは padding を無視 -->
-                        <button class="prev"><img src="images/common/sli-arrow.svg" alt="前へ"></button>
-                        <button class="next"><img src="images/common/sli-arrow.svg" alt="次へ"></button>
-                    </div>
-
-                    <div class="carousel-indicators" data-carousel="1">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
-                        <span class="dot" data-index="2"></span>
-                        <span class="dot" data-index="3"></span>
-                        <span class="dot" data-index="4"></span>
-                        <span class="dot" data-index="5"></span>
-                        <span class="dot" data-index="6"></span>
-                        <span class="dot" data-index="7"></span>
+                        <!-- ページネーション -->
+                        <div class="swiper-reason-pagination"></div>
+                        <!-- 前後の矢印 -->
+                        <div class="swiper-button-prev">
+                            <img src="images/common/sli-arrow.svg" alt="前へ">
+                        </div>
+                        <div class="swiper-button-next">
+                            <img src="images/common/sli-arrow.svg" alt="前へ">
+                        </div>
                     </div>
 
                 </section>
@@ -383,40 +427,33 @@
                     </p>
 
                     <!-- carousel -->
-                    <div class="carousel-container" data-carousel="2">
-                        <div class="carousel">
-                            <div class="carousel-track">
-                                <div class="carousel-slide">
+                    <div class="carousel-container">
+                        <div class="swiper-reason02">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
                                     <p>01 サービス紹介</p><img src="images/reason/2/image_reason2-1.png" alt="Slide 1">
                                 </div>
-                                <div class="carousel-slide">
+                                <div class="swiper-slide">
                                     <p>02 企画提案</p><img src="images/reason/2/image_reason2-2.png" alt="Slide 2">
                                 </div>
-                                <div class="carousel-slide">
+                                <div class="swiper-slide">
                                     <p>03 会社紹介</p><img src="images/reason/2/image_reason2-3.png" alt="Slide 3">
                                 </div>
-                                <div class="carousel-slide">
+                                <div class="swiper-slide">
                                     <p>04 報告資料</p><img src="images/reason/2/image_reason2-4.png" alt="Slide 4">
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Next / Prev ボタンは padding を無視 -->
-                        <button class="prev"><img src="images/common/sli-arrow.svg" alt="前へ"></button>
-                        <button class="next"><img src="images/common/sli-arrow.svg" alt="次へ"></button>
+                        <!-- ページネーション -->
+                        <div class="swiper-reason02-pagination"></div>
+                        <!-- 前後の矢印 -->
+                        <div class="swiper-button-prev">
+                            <img src="images/common/sli-arrow.svg" alt="前へ">
+                        </div>
+                        <div class="swiper-button-next">
+                            <img src="images/common/sli-arrow.svg" alt="前へ">
+                        </div>
                     </div>
-
-                    <div class="carousel-indicators" data-carousel="2">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
-                        <span class="dot" data-index="2"></span>
-                        <span class="dot" data-index="3"></span>
-                        <span class="dot" data-index="4"></span>
-                        <span class="dot" data-index="5"></span>
-                        <span class="dot" data-index="6"></span>
-                        <span class="dot" data-index="7"></span>
-                    </div>
-
                 </section>
 
                 <!-- REASON 3 -->
@@ -432,36 +469,33 @@
                     </p>
 
                     <!-- carousel -->
-                    <div class="carousel-container" data-carousel="3">
-                        <div class="carousel">
-                            <div class="carousel-track">
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-1.png" alt="Slide 1"></div>
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-2.png" alt="Slide 2"></div>
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-3.png" alt="Slide 3"></div>
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-4.png" alt="Slide 4"></div>
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-5.png" alt="Slide 5"></div>
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-6.png" alt="Slide 6"></div>
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-7.png" alt="Slide 7"></div>
-                                <div class="carousel-slide"><img src="images/reason/3/image_reason3-8.png" alt="Slide 8"></div>
+                    <div class="carousel-container">
+                        <div class="swiper-reason03">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="images/reason/3/image_reason3-1.png" alt="Slide 1">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/3/image_reason3-2.png" alt="Slide 2">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/3/image_reason3-3.png" alt="Slide 3">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="images/reason/3/image_reason3-4.png" alt="Slide 4">
+                                </div>
                             </div>
                         </div>
-
-                        <!-- Next / Prev ボタンは padding を無視 -->
-                        <button class="prev"><img src="images/common/sli-arrow.svg" alt="前へ"></button>
-                        <button class="next"><img src="images/common/sli-arrow.svg" alt="次へ"></button>
+                        <!-- ページネーション -->
+                        <div class="swiper-reason03-pagination"></div>
+                        <!-- 前後の矢印 -->
+                        <div class="swiper-button-prev">
+                            <img src="images/common/sli-arrow.svg" alt="前へ">
+                        </div>
+                        <div class="swiper-button-next">
+                            <img src="images/common/sli-arrow.svg" alt="前へ">
+                        </div>
                     </div>
-
-                    <div class="carousel-indicators" data-carousel="3">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
-                        <span class="dot" data-index="2"></span>
-                        <span class="dot" data-index="3"></span>
-                        <span class="dot" data-index="4"></span>
-                        <span class="dot" data-index="5"></span>
-                        <span class="dot" data-index="6"></span>
-                        <span class="dot" data-index="7"></span>
-                    </div>
-
                 </section>
                 <!-- CTA -->
                 <div class="reason-cta">
@@ -484,7 +518,7 @@
             <div class="special-offer js-popUps">
                 <h2 class="special-title">
                     今だけ貰える<br>
-                    <span class="highlight">豪華 <span class="num">2</span> 大特典</span>
+                    <span class="highlight">豪<span class="ls-sm">華</span><span class="num">2</span>大特典</span>
                 </h2>
 
                 <!-- 特典 1 -->
@@ -534,7 +568,7 @@
                 <div class="price-section">
                     <div class="price-label">料金</div>
                     <div class="price-amount">
-                        <span class="price">15,000</span> 円<span class="tax">（税込）</span>
+                        <span class="price"><span class="ls-6">1</span><span class="ls-5">5</span>,000</span> 円<span class="tax">（税込）</span>
                     </div>
                     <p class="price-desc split-text">1スライドあたり<span class="highlight">「46円」</span>のお得価格</p>
                     <!-- 販売実績 -->
@@ -762,31 +796,31 @@
                         <div class="message-title"><span class="message-title-inner"><span class="bottom__first"><span class="bottom___word">2025年は資料作成で</span><span class="bottom__first-bg"></span>
                                     <span class="bottom__white-bg"></span>
                                 </span></span></div>
-                        <div class="message-title"><span class="message-title-inner"><span class="bottom__second"><span class="bottom___word">悩まない1年にしませんか？</span><span class="bottom__second-bg"></span>
+                        <div class="message-title"><span class="message-title-inner"><span class="bottom__second"><span class="bottom___word">悩まない1年にしませんか<span class="ls-minus">？</span></span><span class="bottom__second-bg"></span>
                                     <span class="bottom__white-bg"></span>
                                 </span></span></div>
-                        <div>
-                            <p class="message-text js-fadeIn">
+                        <div class="js-fadeIn">
+                            <p class="message-text">
                                 上司に企画を承認してもらう。<br>
                                 顧客に自社製品を導入してもらう。<br>
                                 採用候補者に応募してもらう。
                             </p>
-                            <p class="message-description js-fadeIn">
+                            <p class="message-description">
                                 仕事の大半は、相手に主張や想いを伝え、行動してもらうことです。
                                 そして、そのカギを握るのが「わかりやすく、説得力のある資料」。
                             </p>
-                            <p class="message-description js-fadeIn">
+                            <p class="message-description">
                                 でも、資料作成には悩みの種。<br>
                                 時間をかけすぎて他のタスクに手が回らなかったり、頑張って作っても「もっと簡潔に」と指摘されることもあったはずです。
                             </p>
-                            <p class="message-description js-fadeIn">
+                            <p class="message-description">
                                 そんな悩みを解消し、誰でも伝わる資料が作れるようになるよう、このスライドテンプレ集を開発しました。
                             </p>
                             <div class="js-fadeIn">
                                 <p class="message-description">
                                     2025年は、「資料作成で悩まない1年」にしませんか？
                                 </p>
-                                <p class="message-description js-fadeIn">
+                                <p class="message-description">
                                     あなたの仕事がもっとスムーズに、もっと成果につながるよう、このスライドテンプレ集がお手伝いします。
                                 </p>
                             </div>
@@ -890,6 +924,7 @@
                             <span class="faq-arrow"></span>
                         </button>
                         <div class="faq-answer">
+                            <span class="faq-icon">A</span>
                             <p>商用利用を含め、自由に利用することができます。ただし、テンプレートを第三者に無断で配布・販売する行為は禁止です。</p>
                         </div>
                     </div>
@@ -900,6 +935,7 @@
                             <span class="faq-arrow"></span>
                         </button>
                         <div class="faq-answer">
+                            <span class="faq-icon">A</span>
                             <p>問題なくご利用いただけます。Windows/Macで動作確認済です。</p>
                         </div>
                     </div>
@@ -910,6 +946,7 @@
                             <span class="faq-arrow"></span>
                         </button>
                         <div class="faq-answer">
+                            <span class="faq-icon">A</span>
                             <p>領収書の発行も承っております。ご希望の方は template@emocri.netまでご連絡ください。</p>
                         </div>
                     </div>
@@ -920,6 +957,7 @@
                             <span class="faq-arrow"></span>
                         </button>
                         <div class="faq-answer">
+                            <span class="faq-icon">A</span>
                             <p>組織単位（会社、部署、プロジェクトチーム、大学のゼミなど）でのご利用を希望される場合には、1人あたりの料金がよりお得になる「グループプラン」をご用意しております。詳しくはお気軽にお問い合わせください。</p>
                         </div>
                     </div>
@@ -939,10 +977,11 @@
         </footer>
     </div>
     <!-- wrapper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/split-type"></script>
-    <script src="lib/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/split-type" defer></script>
+    <script src="lib/swiper/swiper-bundle.min.js" defer></script>
+    <script src="js/script.js" defer></script>
     <!-- ↑先頭に -->
     <script src="js/script.js"></script>
 </body>

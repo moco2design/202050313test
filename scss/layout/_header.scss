@@ -40,6 +40,7 @@
             font-weight: 700;
             display: inline-block;
             transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+            letter-spacing: 0;
         }
     }
 }
@@ -102,6 +103,7 @@
             font-size: vw(40);
             display: inline-block;
             transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+            letter-spacing: 0;
         }
 
         .highlight--blue-bk {
@@ -133,7 +135,7 @@
     }
 }
 
-/*carousel*/
+/*hero carousel*/
 .carousel-wrapper {
     width: vw(375);
     height: vw(208);
@@ -151,12 +153,20 @@
 
     img {
         max-height: vw(54);
+        width: 100%;
+
+        @include media(pc) {
+            max-height: 100%;
+            height: 80px;
+        }
     }
 }
 
 .loop_right {
-    animation: loop_animation_right 10s linear infinite;
+    animation: loop_animation_right 20s linear infinite;
     white-space: nowrap;
+    display: flex;
+    gap: 0;
 }
 
 @keyframes loop_animation_right {
@@ -170,8 +180,10 @@
 }
 
 .loop_left {
-    animation: loop_animation_left 10s linear infinite;
+    animation: loop_animation_left 20s linear infinite;
     white-space: nowrap;
+    display: flex;
+    gap: 0;
 }
 
 @keyframes loop_animation_left {
@@ -224,6 +236,10 @@
         font-size: vw(8);
         font-weight: bold;
         border-radius: vw(5);
+
+        @include media(sp) {
+            top: vw(26);
+        }
 
         span {
             display: block;
@@ -284,6 +300,7 @@
             line-height: 23px;
             display: inline-block;
             transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+            letter-spacing: 0;
         }
 
         .features--highlight-wrap {
@@ -303,6 +320,7 @@
             transform: matrix(1, 0, -0.17, 0.98, 0, 0);
             font-family: "Roboto";
             color: #0577FB;
+            letter-spacing: 0;
         }
 
         span.features--unit {

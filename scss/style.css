@@ -419,6 +419,7 @@ footer {
   font-weight: 700;
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+  letter-spacing: 0;
 }
 
 .hero {
@@ -478,6 +479,7 @@ footer {
   font-size: clamp(40px, 10.6666666667vw, 80px);
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+  letter-spacing: 0;
 }
 .hero--inner h1 .highlight--blue-bk {
   font-weight: 700;
@@ -505,7 +507,7 @@ footer {
   }
 }
 
-/*carousel*/
+/*hero carousel*/
 .carousel-wrapper {
   width: clamp(375px, 100vw, 750px);
   height: clamp(208px, 55.4666666667vw, 416px);
@@ -523,11 +525,20 @@ footer {
 }
 .loop-wrapper img {
   max-height: clamp(54px, 14.4vw, 108px);
+  width: 100%;
+}
+@media (min-width: 1025px) {
+  .loop-wrapper img {
+    max-height: 100%;
+    height: 80px;
+  }
 }
 
 .loop_right {
-  animation: loop_animation_right 10s linear infinite;
+  animation: loop_animation_right 20s linear infinite;
   white-space: nowrap;
+  display: flex;
+  gap: 0;
 }
 
 @keyframes loop_animation_right {
@@ -539,8 +550,10 @@ footer {
   }
 }
 .loop_left {
-  animation: loop_animation_left 10s linear infinite;
+  animation: loop_animation_left 20s linear infinite;
   white-space: nowrap;
+  display: flex;
+  gap: 0;
 }
 
 @keyframes loop_animation_left {
@@ -590,6 +603,11 @@ footer {
   font-size: clamp(8px, 2.1333333333vw, 16px);
   font-weight: bold;
   border-radius: clamp(5px, 1.3333333333vw, 10px);
+}
+@media (max-width: 600px) {
+  .profile .profile-badge {
+    top: clamp(26px, 6.9333333333vw, 52px);
+  }
 }
 .profile .profile-badge span {
   display: block;
@@ -646,6 +664,7 @@ footer {
   line-height: 23px;
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+  letter-spacing: 0;
 }
 .features .feature-item .features--highlight-wrap {
   display: flex;
@@ -662,6 +681,7 @@ footer {
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   font-family: "Roboto";
   color: #0577FB;
+  letter-spacing: 0;
 }
 .features .feature-item span.features--unit {
   font-size: clamp(12px, 3.2vw, 24px);
@@ -884,6 +904,7 @@ footer {
   color: #0577FB;
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+  letter-spacing: 0;
 }
 .problem-expert .highlight-blue {
   color: #0577FB;
@@ -1069,9 +1090,11 @@ footer {
   line-height: 1.5;
   text-align: justify;
   color: #0577FB;
-  transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   display: inline-block;
   margin-bottom: clamp(32px, 8.5333333333vw, 64px);
+}
+.solution--jirei-bottom .solution--highlight span {
+  transform: matrix(1, 0, -0.17, 0.98, 0, 0);
 }
 .solution--jirei-bottom .solution--emphasis {
   font-size: clamp(18px, 4.8vw, 36px);
@@ -1310,6 +1333,7 @@ footer {
   color: #0577FB;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 /*solution reasons*/
@@ -1339,6 +1363,7 @@ footer {
   font-size: clamp(50px, 13.3333333333vw, 100px);
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+  letter-spacing: -0.02em;
 }
 .solution--reasons .reason {
   background: #fff;
@@ -1351,8 +1376,6 @@ footer {
   margin-right: 0;
   margin-left: auto;
   /* carousel */
-  /* Next / Prev ボタン */
-  /* ドットインジケーター */
   /*// carousel*/
 }
 .solution--reasons .reason:nth-child(odd) {
@@ -1450,19 +1473,12 @@ footer {
 .solution--reasons .reason .carousel-container {
   position: relative;
 }
-.solution--reasons .reason .carousel {
+.solution--reasons .reason .carousel-container .swiper-reason,
+.solution--reasons .reason .carousel-container .swiper-reason02,
+.solution--reasons .reason .carousel-container .swiper-reason03 {
   overflow: hidden;
-  width: 100%;
-  /* 親要素の padding 内に収まる */
 }
-.solution--reasons .reason .carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-.solution--reasons .reason .carousel-slide {
-  min-width: 100%;
-}
-.solution--reasons .reason .carousel-slide p {
+.solution--reasons .reason .carousel-container .swiper-reason02 p {
   display: block;
   background-color: #0577FB;
   padding: clamp(1px, 0.2666666667vw, 2px) clamp(12px, 3.2vw, 24px);
@@ -1471,55 +1487,42 @@ footer {
   font-size: clamp(14px, 3.7333333333vw, 28px);
   font-weight: 700;
 }
-.solution--reasons .reason .carousel-slide img {
+.solution--reasons .reason .carousel-container .swiper-button-prev {
+  left: -30px;
+}
+.solution--reasons .reason .carousel-container .swiper-button-prev::after {
+  content: none;
+}
+.solution--reasons .reason .carousel-container .swiper-button-prev img {
   width: 100%;
+  height: auto;
 }
-.solution--reasons .reason .prev,
-.solution--reasons .reason .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 10;
-  border: 0;
-  background-color: transparent;
+.solution--reasons .reason .carousel-container .swiper-button-next {
+  right: -30px;
 }
-.solution--reasons .reason .prev img,
-.solution--reasons .reason .next img {
-  width: clamp(14px, 3.7333333333vw, 28px);
+.solution--reasons .reason .carousel-container .swiper-button-next::after {
+  content: none;
 }
-@media (max-width: 600px) {
-  .solution--reasons .reason .prev img,
-  .solution--reasons .reason .next img {
-    width: clamp(20px, 5.3333333333vw, 40px);
-    height: clamp(20px, 5.3333333333vw, 40px);
-  }
-}
-.solution--reasons .reason .prev {
-  left: calc(-1 * clamp(20px, 5.3333333333vw, 40px));
-}
-.solution--reasons .reason .next {
-  right: calc(-1 * clamp(20px, 5.3333333333vw, 40px));
-}
-.solution--reasons .reason .next img {
+.solution--reasons .reason .carousel-container .swiper-button-next img {
+  width: 100%;
+  height: auto;
   transform: scaleX(-1);
 }
-.solution--reasons .reason .carousel-indicators {
-  text-align: center;
-  margin-top: 10px;
+.solution--reasons .reason .carousel-container .swiper-reason-pagination,
+.solution--reasons .reason .carousel-container .swiper-reason02-pagination,
+.solution--reasons .reason .carousel-container .swiper-reason03-pagination {
+  position: relative;
+  bottom: clamp(-10px, -2.6666666667vw, -20px);
+  margin-inline: auto;
+  width: -moz-fit-content;
+  width: fit-content;
 }
-.solution--reasons .reason .dot {
-  height: 5px;
-  width: 5px;
-  margin: 0 5px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.3s;
-  cursor: pointer;
+.solution--reasons .reason .carousel-container .swiper {
+  max-width: 500px;
 }
-.solution--reasons .reason .dot.active {
-  background-color: #0577FB;
+.solution--reasons .reason .carousel-container .swiper-slide img {
+  height: auto;
+  width: 100%;
 }
 .solution--reasons .reason-cta {
   border-radius: clamp(10px, 2.6666666667vw, 20px);
@@ -1572,6 +1575,9 @@ footer {
   gap: clamp(12px, 3.2vw, 24px);
   margin-bottom: clamp(10px, 2.6666666667vw, 20px);
 }
+.solution--reasons .reason-cta .cta-list ul li:last-child {
+  margin-bottom: 0;
+}
 .solution--reasons .reason-cta .cta-list ul li img {
   width: clamp(34.2px, 9.12vw, 68.4px);
 }
@@ -1595,6 +1601,7 @@ footer {
   position: relative;
   padding-bottom: clamp(6px, 1.6vw, 12px);
   margin-bottom: clamp(6px, 1.6vw, 12px);
+  margin-top: clamp(8px, 2.1333333333vw, 16px);
   --border-width: 0%;
 }
 .solution--reasons .reason-cta .cta-footer .cta-big::after {
@@ -1627,7 +1634,7 @@ footer {
   width: max-content;
   margin-inline: auto;
   position: relative;
-  margin-bottom: clamp(48px, 12.8vw, 96px);
+  margin-bottom: clamp(32px, 8.5333333333vw, 64px);
 }
 @media (max-width: 600px) {
   .special-offer .special-title {
@@ -1669,13 +1676,21 @@ footer {
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   line-height: 1;
+  vertical-align: baseline;
+  position: relative;
+  top: -1.4vw;
+}
+.special-offer .special-title .ls-sm {
+  letter-spacing: 0.16em;
 }
 .special-offer .special-title .num {
   font-family: "Roboto";
   font-weight: 700;
   display: inline-block;
-  transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   font-size: clamp(56px, 14.9333333333vw, 112px);
+  letter-spacing: 0.07em;
+  position: relative;
+  top: 1.2vw;
 }
 .special-offer .special-item {
   background: #fff;
@@ -1718,6 +1733,7 @@ footer {
   color: #0577FB;
   position: absolute;
   top: clamp(-40px, -10.6666666667vw, -80px);
+  letter-spacing: -0.02em;
 }
 @media (max-width: 600px) {
   .special-offer .special-item .special-label .num {
@@ -1805,7 +1821,13 @@ footer {
   font-family: "Roboto";
   font-weight: 700;
   font-size: clamp(56px, 14.9333333333vw, 112px);
+  letter-spacing: -0.02em;
+}
+.price-section .price-amount .price .ls-6 {
   letter-spacing: -0.06em;
+}
+.price-section .price-amount .price .ls-5 {
+  letter-spacing: -0.05em;
 }
 .price-section .price-amount .tax {
   font-size: clamp(11px, 2.9333333333vw, 22px);
@@ -1915,6 +1937,7 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  letter-spacing: 0;
 }
 #sale.cta-section .price-section .sale-title-wrap .sale-title {
   font-family: "Noto Sans";
@@ -1997,6 +2020,7 @@ footer {
   margin-right: clamp(5px, 1.3333333333vw, 10px);
   position: relative;
   padding: 0 clamp(5px, 1.3333333333vw, 10px);
+  letter-spacing: -0.02em;
 }
 #sale.cta-section .price-section .price-nomal .price::before {
   position: absolute;
@@ -2023,11 +2047,11 @@ footer {
   font-family: "Roboto";
   font-weight: 700;
   font-size: clamp(56px, 14.9333333333vw, 112px);
-  letter-spacing: -0.06em;
+  letter-spacing: -0.02em;
   color: #FC3D40;
 }
 #sale.cta-section .price-section .price-amount .price span {
-  letter-spacing: -0.16em;
+  letter-spacing: -0.12em;
 }
 #sale.cta-section .price-section .price-amount .tax {
   font-size: clamp(11px, 2.9333333333vw, 22px);
@@ -2142,8 +2166,8 @@ footer {
   font-weight: 700;
   font-size: clamp(80px, 21.3333333333vw, 160px);
   text-align: center;
-  color: rgba(58, 156, 255, 0.5);
-  mix-blend-mode: multiply;
+  color: #237DFF;
+  letter-spacing: 0;
 }
 .voice-section .voice-desc {
   font-size: clamp(14px, 3.7333333333vw, 28px);
@@ -2367,6 +2391,7 @@ footer {
   text-align: center;
   color: rgba(58, 156, 255, 0.5);
   mix-blend-mode: multiply;
+  letter-spacing: 0;
 }
 .about-section .about-section-profile-wrap {
   max-width: clamp(300px, 80vw, 600px);
@@ -2415,6 +2440,11 @@ footer {
   display: inline-block;
   width: 100%;
 }
+@media (max-width: 600px) {
+  .about-section .about-section-profile-wrap .about-section-profile .profile-info .profile-detail span {
+    font-size: clamp(13px, 3.4666666667vw, 26px);
+  }
+}
 .about-section .about-section-profile-wrap .about-section-profile .profile-info .profile-detail span.border-dashed {
   padding-bottom: clamp(6px, 1.6vw, 12px);
   margin-bottom: clamp(6px, 1.6vw, 12px);
@@ -2449,20 +2479,22 @@ footer {
 .about-section .about-section-achievements .achievements-list li {
   font-size: clamp(12px, 3.2vw, 24px);
   font-weight: 700;
-  margin-bottom: clamp(10px, 2.6666666667vw, 20px);
+  margin-bottom: clamp(4px, 1.0666666667vw, 8px);
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: clamp(20px, 5.3333333333vw, 40px);
   font-feature-settings: "palt";
 }
 .about-section .about-section-achievements .achievements-list li:last-child span.about-list-inr {
   border: none;
+  position: relative;
+  top: clamp(16px, 4.2666666667vw, 32px);
 }
 .about-section .about-section-achievements .achievements-list li span.about-list-inr {
   display: block;
   width: 100%;
   border-bottom: clamp(1px, 0.2666666667vw, 2px) solid #fff;
-  padding-bottom: clamp(16px, 4.2666666667vw, 32px);
+  padding-bottom: clamp(14px, 3.7333333333vw, 28px);
   padding-right: clamp(20px, 5.3333333333vw, 40px);
 }
 @media (max-width: 600px) {
@@ -2477,6 +2509,7 @@ footer {
   color: #BCDDFE;
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+  letter-spacing: 0.02em;
 }
 .about-section .about-section-achievements .achievements-list li .highlight {
   color: #F8E538;
@@ -2532,6 +2565,10 @@ footer {
 .about-section .about-section-message .message-title .message-title-inner {
   display: inline-block;
   transform: skew(10deg);
+  letter-spacing: 0;
+}
+.about-section .about-section-message .message-title .message-title-inner .ls-minus {
+  letter-spacing: -0.1em;
 }
 .about-section .about-section-message .message-text {
   font-size: clamp(12px, 3.2vw, 24px);
@@ -2580,11 +2617,12 @@ footer {
 
 /*FAQ*/
 .faq {
-  background-image: url(../images/common/image_hougan1.png);
+  background-color: #BCDDFE;
+  background-image: url(../images/common/bg-alpha.svg);
   padding: clamp(40px, 10.6666666667vw, 80px) clamp(25px, 6.6666666667vw, 50px);
   text-align: center;
-  background-position: bottom center;
-  background-size: auto;
+  background-position: top center;
+  background-size: 100%;
 }
 .faq .faq-title {
   font-size: clamp(30px, 8vw, 60px);
