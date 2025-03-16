@@ -1,59 +1,45 @@
-// swiper-reason
 document.addEventListener("DOMContentLoaded", function () {
-    const swiperReason = new Swiper(".swiper-reason", {
-        loop: true, // ループ有効
-        speed: 1500, // スライド速度（ミリ秒）
-        autoplay: false,
-        pagination: {
-            el: ".swiper-reason-pagination",
-            clickable: true,
+    const swiperConfigs = [{
+            selector: ".swiper-reason",
+            pagination: ".swiper-reason-pagination",
+            next: ".swiper-button-next.r01",
+            prev: ".swiper-button-prev.r01"
         },
-        navigation: {
-            nextEl: ".swiper-button-next.r01",
-            prevEl: ".swiper-button-prev.r01",
+        {
+            selector: ".swiper-reason02",
+            pagination: ".swiper-reason02-pagination",
+            next: ".swiper-button-next.r02",
+            prev: ".swiper-button-prev.r02"
         },
+        {
+            selector: ".swiper-reason03",
+            pagination: ".swiper-reason03-pagination",
+            next: ".swiper-button-next.r03",
+            prev: ".swiper-button-prev.r03"
+        }
+    ];
+
+    swiperConfigs.forEach(config => {
+        const swiperInstance = new Swiper(config.selector, {
+            loop: true,
+            speed: 1500,
+            autoplay: false,
+            pagination: {
+                el: config.pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: config.next,
+                prevEl: config.prev
+            }
+        });
+
+        console.log(`Swiper initialized for ${config.selector}:`, swiperInstance);
     });
 
-    console.log("Swiper initialized:", swiperReason);
+    console.log("All Swipers initialized successfully!");
 });
 
-// swiper-reason02
-document.addEventListener("DOMContentLoaded", function () {
-    const swiperReason = new Swiper(".swiper-reason02", {
-        loop: true, // ループ有効
-        speed: 1500, // スライド速度（ミリ秒）
-        autoplay: false,
-        pagination: {
-            el: ".swiper-reason02-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next.r02",
-            prevEl: ".swiper-button-prev.r02",
-        },
-    });
-
-    console.log("Swiper initialized:", swiperReason);
-});
-
-// swiper-reason03
-document.addEventListener("DOMContentLoaded", function () {
-    const swiperReason = new Swiper(".swiper-reason03", {
-        loop: true, // ループ有効
-        speed: 1500, // スライド速度（ミリ秒）
-        autoplay: false,
-        pagination: {
-            el: ".swiper-reason03-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next.r03",
-            prevEl: ".swiper-button-prev.r03",
-        },
-    });
-
-    console.log("Swiper initialized:", swiperReason);
-});
 
 //voice-carousel
 document.addEventListener("DOMContentLoaded", function () {
@@ -588,95 +574,59 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-let swiperLoop01;
+
+//ループスライド
 document.addEventListener("DOMContentLoaded", function () {
-    swiperLoop01 = new Swiper(".swiper-loop01", {
-        loop: true,
-        slidesPerView: "auto",
-        speed: 30000,
-        allowTouchMove: false,
-        autoplay: {
-            delay: 0,
+    const swiperConfigs = [{
+            selector: ".swiper-loop01",
+            slidesPerView: "auto",
+            speed: 30000
         },
+        {
+            selector: ".swiper-loop01-2",
+            slidesPerView: "auto",
+            speed: 30000,
+            reverse: true
+        },
+        {
+            selector: ".swiper-loop01-3",
+            slidesPerView: "auto",
+            speed: 30000
+        },
+        {
+            selector: ".swiper-loop02",
+            slidesPerView: 1,
+            speed: 20000
+        },
+        {
+            selector: ".swiper-loop03",
+            slidesPerView: 1,
+            speed: 20000
+        },
+        {
+            selector: ".swiper-loop04",
+            slidesPerView: 1,
+            speed: 20000
+        },
+        {
+            selector: ".swiper-loop05",
+            slidesPerView: 1,
+            speed: 20000
+        }
+    ];
+
+    swiperConfigs.forEach(config => {
+        new Swiper(config.selector, {
+            loop: true,
+            slidesPerView: config.slidesPerView,
+            speed: config.speed,
+            allowTouchMove: false,
+            autoplay: {
+                delay: 0,
+                reverseDirection: config.reverse || false // 逆方向スライドの設定
+            }
+        });
     });
 
-});
-let swiperLoop012;
-document.addEventListener("DOMContentLoaded", function () {
-    swiperLoop012 = new Swiper(".swiper-loop01-2", {
-        loop: true,
-        slidesPerView: "auto",
-        speed: 30000,
-        allowTouchMove: false,
-        autoplay: {
-            delay: 0,
-            reverseDirection: true, //逆方向
-        },
-    });
-
-});
-let swiperLoop013;
-document.addEventListener("DOMContentLoaded", function () {
-    swiperLoop013 = new Swiper(".swiper-loop01-3", {
-        loop: true,
-        slidesPerView: "auto",
-        speed: 30000,
-        allowTouchMove: false,
-        autoplay: {
-            delay: 0,
-        },
-    });
-
-});
-let swiperLoop02;
-document.addEventListener("DOMContentLoaded", function () {
-    swiperLoop02 = new Swiper(".swiper-loop02", {
-        loop: true,
-        slidesPerView: 1,
-        speed: 20000,
-        allowTouchMove: false,
-        autoplay: {
-            delay: 0,
-        },
-    });
-
-});
-let swiperLoop03;
-document.addEventListener("DOMContentLoaded", function () {
-    swiperLoop03 = new Swiper(".swiper-loop03", {
-        loop: true,
-        slidesPerView: 1,
-        speed: 20000,
-        allowTouchMove: false,
-        autoplay: {
-            delay: 0,
-        },
-    });
-
-});
-let swiperLoop04;
-document.addEventListener("DOMContentLoaded", function () {
-    swiperLoop04 = new Swiper(".swiper-loop04", {
-        loop: true,
-        slidesPerView: 1,
-        speed: 20000,
-        allowTouchMove: false,
-        autoplay: {
-            delay: 0,
-        },
-    });
-
-});
-let swiperLoop05;
-document.addEventListener("DOMContentLoaded", function () {
-    swiperLoop05 = new Swiper(".swiper-loop05", {
-        loop: true,
-        slidesPerView: 1,
-        speed: 20000,
-        allowTouchMove: false,
-        autoplay: {
-            delay: 0,
-        },
-    });
-
+    console.log("All Swipers initialized successfully!");
 });
