@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next.r01",
+            prevEl: ".swiper-button-prev.r01",
         },
     });
 
@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next.r02",
+            prevEl: ".swiper-button-prev.r02",
         },
     });
 
@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next.r03",
+            prevEl: ".swiper-button-prev.r03",
         },
     });
 
@@ -64,11 +64,11 @@ document.addEventListener("DOMContentLoaded", function () {
         loopAdditionalSlides: 1,
         centeredSlides: true,
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
+            nextEl: '.swiper-button-next.voice',
+            prevEl: '.swiper-button-prev.voice'
         },
         pagination: {
-            el: ".swiper-pagination",
+            el: ".swiper-pagination.voice",
             clickable: true,
         },
     });
