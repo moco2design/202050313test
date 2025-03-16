@@ -588,3 +588,95 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+let swiperLoop01;
+document.addEventListener("DOMContentLoaded", function () {
+    swiperLoop01 = new Swiper(".swiper-loop01", {
+        loop: true,
+        slidesPerView: "auto",
+        speed: 30000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 0,
+        },
+    });
+
+});
+let swiperLoop012;
+document.addEventListener("DOMContentLoaded", function () {
+    swiperLoop012 = new Swiper(".swiper-loop01-2", {
+        loop: true,
+        slidesPerView: "auto",
+        speed: 30000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 0,
+            reverseDirection: true, //逆方向
+        },
+    });
+
+});
+let swiperLoop013;
+document.addEventListener("DOMContentLoaded", function () {
+    swiperLoop013 = new Swiper(".swiper-loop01-3", {
+        loop: true,
+        slidesPerView: "auto",
+        speed: 30000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 0,
+        },
+    });
+
+});
+let swiperLoop02;
+document.addEventListener("DOMContentLoaded", function () {
+    swiperLoop02 = new Swiper(".swiper-loop02", {
+        loop: true,
+        slidesPerView: 1,
+        speed: 20000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 0,
+        },
+    });
+
+});
+let swiperLoop03;
+document.addEventListener("DOMContentLoaded", function () {
+    swiperLoop03 = new Swiper(".swiper-loop03", {
+        loop: true,
+        slidesPerView: 1,
+        speed: 20000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 0,
+        },
+    });
+
+});
+let swiperLoop04;
+document.addEventListener("DOMContentLoaded", function () {
+    swiperLoop04 = new Swiper(".swiper-loop04", {
+        loop: true,
+        slidesPerView: 1,
+        speed: 20000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 0,
+        },
+    });
+
+});
+let swiperLoop05;
+document.addEventListener("DOMContentLoaded", function () {
+    swiperLoop05 = new Swiper(".swiper-loop05", {
+        loop: true,
+        slidesPerView: 1,
+        speed: 20000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 0,
+        },
+    });
+
+});

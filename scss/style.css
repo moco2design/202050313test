@@ -517,54 +517,20 @@ footer {
   gap: clamp(5px, 1.3333333333vw, 10px);
 }
 
-.loop-wrapper {
-  display: flex;
-  gap: 0;
-  width: 100%;
-  overflow: hidden;
+.hero .swiper-wrapper {
+  transition-timing-function: linear;
+  width: 110%;
 }
-.loop-wrapper img {
+@media (max-width: 600px) {
+  .hero .swiper-wrapper {
+    width: 105%;
+  }
+}
+.hero .swiper-slide img {
   height: auto;
-  /* 画像のアスペクト比を維持しながら拡大 */
-  width: auto;
-  /* 画像の元サイズを尊重 */
-  max-width: 100%;
+  width: 100%;
 }
 
-.loop_right {
-  animation: loop_animation_right 25s linear infinite;
-  white-space: nowrap;
-  display: flex;
-  gap: 0;
-  width: auto;
-  min-width: 110%;
-}
-
-@keyframes loop_animation_right {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-.loop_left {
-  animation: loop_animation_left 25s linear infinite;
-  white-space: nowrap;
-  display: flex;
-  gap: 0;
-  width: auto;
-  min-width: 110%;
-}
-
-@keyframes loop_animation_left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 /*profile*/
 .profile-wrapper {
   position: relative;
@@ -593,6 +559,8 @@ footer {
   width: clamp(181px, 48.2666666667vw, 362px);
   height: clamp(181px, 48.2666666667vw, 362px);
   margin-left: calc(-1 * clamp(30px, 8vw, 60px));
+  position: relative;
+  z-index: 1;
 }
 .profile .profile-badge {
   position: absolute;
@@ -630,6 +598,8 @@ footer {
   text-align: left;
   width: -moz-max-content;
   width: max-content;
+  position: relative;
+  z-index: 10;
 }
 
 .features {
@@ -1871,9 +1841,6 @@ footer {
 .sales-info {
   text-align: center;
 }
-.sales-info .loop_left {
-  min-width: 200%;
-}
 .sales-info .sales-images {
   text-align: center;
   width: calc(100% + clamp(40px, 10.6666666667vw, 80px));
@@ -1895,6 +1862,13 @@ footer {
   .sales-info .sales-images img {
     max-height: 61px;
   }
+}
+.sales-info .swiper-wrapper {
+  transition-timing-function: linear;
+}
+.sales-info .swiper-slide img {
+  height: auto;
+  width: 100%;
 }
 .sales-info .sales-image-desc {
   font-size: clamp(9px, 2.4vw, 18px);

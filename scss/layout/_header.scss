@@ -145,58 +145,24 @@
     gap: vw(5);
 }
 
-.loop-wrapper {
-    display: flex;
-    gap: 0;
-    width: 100%;
-    overflow: hidden;
+.hero {
 
-    img {
+    .swiper-wrapper {
+        transition-timing-function: linear;
+        width: 110%;
+
+        @include media(sp) {
+            width: 105%;
+        }
+    }
+
+    .swiper-slide img {
         height: auto;
-        /* 画像のアスペクト比を維持しながら拡大 */
-        width: auto;
-        /* 画像の元サイズを尊重 */
-        max-width: 100%;
+        width: 100%;
     }
 }
 
-.loop_right {
-    animation: loop_animation_right 25s linear infinite;
-    white-space: nowrap;
-    display: flex;
-    gap: 0;
-    width: auto;
-    min-width: 110%;
-}
 
-@keyframes loop_animation_right {
-    0% {
-        transform: translateX(-50%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-.loop_left {
-    animation: loop_animation_left 25s linear infinite;
-    white-space: nowrap;
-    display: flex;
-    gap: 0;
-    width: auto;
-    min-width: 110%;
-}
-
-@keyframes loop_animation_left {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
 
 
 /*profile*/
@@ -226,6 +192,8 @@
         width: vw(181);
         height: vw(181);
         margin-left: calc(-1 * vw(30));
+        position: relative;
+        z-index: 1;
     }
 
     .profile-badge {
@@ -264,6 +232,8 @@
             padding: 0 vw(4);
             text-align: left;
             width: max-content;
+            position: relative;
+            z-index: 10;
         }
     }
 }

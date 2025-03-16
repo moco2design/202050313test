@@ -1275,14 +1275,10 @@
 .sales-info {
     text-align: center;
 
-    .loop_left {
-        min-width: 200%;
-    }
 
     .sales-images {
         text-align: center;
         width: calc(100% + vw(40));
-
         margin: 0 vw(-40) vw(20);
         display: block;
         height: 100%;
@@ -1300,6 +1296,15 @@
                 max-height: 61px;
             }
         }
+    }
+
+    .swiper-wrapper {
+        transition-timing-function: linear;
+    }
+
+    .swiper-slide img {
+        height: auto;
+        width: 100%;
     }
 
     .sales-image-desc {
