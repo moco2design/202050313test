@@ -1275,21 +1275,30 @@
 .sales-info {
     text-align: center;
 
+    .loop_left {
+        min-width: 200%;
+    }
+
     .sales-images {
         text-align: center;
         width: calc(100% + vw(40));
-        max-width: 750px;
+
         margin: 0 vw(-40) vw(20);
         display: block;
+        height: 100%;
 
         @include media(sp) {
             margin: 0 vw(-20) vw(20);
         }
 
         img {
-            width: 100%;
+            max-width: 1000px !important;
             display: block;
-            max-width: 750px;
+            height: 100%;
+
+            @include media(sp) {
+                max-height: 61px;
+            }
         }
     }
 
@@ -1300,6 +1309,7 @@
     .btn-cta {
         width: calc(100% + vw(5));
         margin: vw(25) vw(-8) 0;
+        margin-inline: auto;
     }
 
     .note {
@@ -1385,6 +1395,12 @@
             height: vw(98);
             font-feature-settings: "palt";
             line-height: 1;
+            letter-spacing: 0;
+
+            @include media(sp) {
+                width: 104px;
+                height: 104px;
+            }
 
             .circle-label {
                 font-size: vw(16);
@@ -1392,6 +1408,12 @@
                 top: vw(-30);
                 margin-bottom: vw(-30);
                 left: vw(-10);
+
+                @include media(sp) {
+                    top: -5px;
+                    left: vw(-6);
+                    margin-bottom: 0;
+                }
             }
 
             .is--block {
@@ -1399,6 +1421,12 @@
                 left: vw(-10);
                 top: vw(-1);
                 margin-bottom: vw(-1);
+
+                @include media(sp) {
+                    left: vw(-7);
+                    top: -6px;
+                    margin-bottom: 0;
+                }
             }
 
             .price {
@@ -1422,6 +1450,13 @@
                 top: vw(-4);
                 margin-bottom: vw(-4);
                 left: vw(-10);
+
+                @include media(sp) {
+                    top: -9px;
+                    left: vw(-6);
+                    margin-bottom: 0;
+                    font-size: 14px;
+                }
             }
         }
 
@@ -1529,9 +1564,9 @@
 
         .sales-images {
             text-align: center;
-            width: calc(100% + vw(40));
+            width: calc(100% + vw(50));
             max-width: 750px;
-            margin: 0 vw(-40) vw(6);
+            margin: 0 vw(-50) vw(6);
             display: block;
 
             @include media(sp) {
@@ -1541,7 +1576,6 @@
             img {
                 width: 100%;
                 display: block;
-                max-width: 750px;
             }
         }
 
