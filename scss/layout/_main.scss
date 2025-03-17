@@ -385,6 +385,7 @@
         font-size: vw(16);
         font-weight: 700;
         margin-bottom: vw(30);
+        text-align: justify;
     }
 
     .solution--highlight {
@@ -715,7 +716,7 @@
         color: #000;
         border-radius: vw(20) 0 0 vw(20);
         padding: vw(32) vw(26);
-        margin-bottom: vw(47);
+        margin-bottom: vw(22);
         text-align: left;
         width: vw(355);
         margin-right: 0;
@@ -790,6 +791,7 @@
             line-height: 1.5;
             margin-bottom: vw(13);
             font-feature-settings: "palt";
+            text-align: justify;
         }
 
         .slide-content {
@@ -846,6 +848,10 @@
             .swiper-button-prev {
                 left: -30px;
 
+                @include media(sp) {
+                    left: -27px;
+                }
+
                 &::after {
                     content: none;
                 }
@@ -859,6 +865,10 @@
             .swiper-button-next {
                 right: -30px;
 
+                @include media(sp) {
+                    right: -27px;
+                }
+
                 &::after {
                     content: none;
                 }
@@ -867,6 +877,13 @@
                     width: 100%;
                     height: auto;
                     transform: scaleX(-1);
+                }
+            }
+
+            .swiper-button-prev img,
+            .swiper-button-next img {
+                @include media(sp) {
+                    max-width: 20px;
                 }
             }
 
@@ -1180,6 +1197,7 @@
             margin-bottom: vw(20);
             text-align: left;
             font-feature-settings: "palt";
+            text-align: justify;
         }
 
         .special-image {
@@ -1598,6 +1616,7 @@
         .btn-cta {
             width: calc(100% + vw(5));
             margin: vw(25) vw(-8) 0;
+            margin-inline: auto;
         }
 
         .note {
@@ -1823,6 +1842,7 @@
                 font-size: vw(10);
                 color: #000;
                 margin-bottom: vw(10);
+                text-align: justify;
             }
         }
     }
@@ -1979,6 +1999,7 @@
             font-feature-settings: "palt";
             line-height: 1.8;
             letter-spacing: .05em;
+            text-align: justify;
         }
     }
 
@@ -2117,6 +2138,7 @@
             max-width: vw(300);
             margin-inline: auto;
             font-feature-settings: "palt";
+            text-align: justify;
         }
 
         .message-description {
@@ -2128,6 +2150,7 @@
             max-width: vw(300);
             margin-inline: auto;
             font-feature-settings: "palt";
+            text-align: justify;
         }
     }
 }

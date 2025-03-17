@@ -628,6 +628,12 @@ footer {
   font-size: clamp(12px, 3.2vw, 24px);
   font-weight: bold;
 }
+@media (max-width: 600px) {
+  .features .feature-item p.bottom-900 {
+    position: relative;
+    top: -5px;
+  }
+}
 .features .feature-item .features--24hours {
   font-family: "Roboto";
   font-weight: 700;
@@ -644,6 +650,12 @@ footer {
 }
 .features .feature-item .features--highlight-wrap span {
   display: block;
+}
+@media (max-width: 600px) {
+  .features .feature-item .features--highlight-wrap.highlight-900 {
+    position: relative;
+    top: -5px;
+  }
 }
 .features .feature-item span.features--highlight {
   font-size: clamp(40px, 10.6666666667vw, 80px);
@@ -1053,6 +1065,7 @@ footer {
   font-size: clamp(16px, 4.2666666667vw, 32px);
   font-weight: 700;
   margin-bottom: clamp(30px, 8vw, 60px);
+  text-align: justify;
 }
 .solution--jirei-bottom .solution--highlight {
   font-family: "Noto Sans";
@@ -1341,7 +1354,7 @@ footer {
   color: #000;
   border-radius: clamp(20px, 5.3333333333vw, 40px) 0 0 clamp(20px, 5.3333333333vw, 40px);
   padding: clamp(32px, 8.5333333333vw, 64px) clamp(26px, 6.9333333333vw, 52px);
-  margin-bottom: clamp(47px, 12.5333333333vw, 94px);
+  margin-bottom: clamp(22px, 5.8666666667vw, 44px);
   text-align: left;
   width: clamp(355px, 94.6666666667vw, 710px);
   margin-right: 0;
@@ -1415,6 +1428,7 @@ footer {
   line-height: 1.5;
   margin-bottom: clamp(13px, 3.4666666667vw, 26px);
   font-feature-settings: "palt";
+  text-align: justify;
 }
 .solution--reasons .reason .slide-content {
   background: #E7F3FF;
@@ -1461,6 +1475,11 @@ footer {
 .solution--reasons .reason .carousel-container .swiper-button-prev {
   left: -30px;
 }
+@media (max-width: 600px) {
+  .solution--reasons .reason .carousel-container .swiper-button-prev {
+    left: -27px;
+  }
+}
 .solution--reasons .reason .carousel-container .swiper-button-prev::after {
   content: none;
 }
@@ -1471,6 +1490,11 @@ footer {
 .solution--reasons .reason .carousel-container .swiper-button-next {
   right: -30px;
 }
+@media (max-width: 600px) {
+  .solution--reasons .reason .carousel-container .swiper-button-next {
+    right: -27px;
+  }
+}
 .solution--reasons .reason .carousel-container .swiper-button-next::after {
   content: none;
 }
@@ -1478,6 +1502,12 @@ footer {
   width: 100%;
   height: auto;
   transform: scaleX(-1);
+}
+@media (max-width: 600px) {
+  .solution--reasons .reason .carousel-container .swiper-button-prev img,
+  .solution--reasons .reason .carousel-container .swiper-button-next img {
+    max-width: 20px;
+  }
 }
 .solution--reasons .reason .carousel-container .swiper-reason-pagination,
 .solution--reasons .reason .carousel-container .swiper-reason02-pagination,
@@ -1761,6 +1791,7 @@ footer {
   margin-bottom: clamp(20px, 5.3333333333vw, 40px);
   text-align: left;
   font-feature-settings: "palt";
+  text-align: justify;
 }
 .special-offer .special-item .special-image {
   text-align: center;
@@ -2134,6 +2165,7 @@ footer {
 #sale.cta-section .sales-info .btn-cta {
   width: calc(100% + clamp(5px, 1.3333333333vw, 10px));
   margin: clamp(25px, 6.6666666667vw, 50px) clamp(-8px, -2.1333333333vw, -16px) 0;
+  margin-inline: auto;
 }
 #sale.cta-section .sales-info .note {
   font-size: clamp(9px, 2.4vw, 18px);
@@ -2336,6 +2368,7 @@ footer {
   font-size: clamp(10px, 2.6666666667vw, 20px);
   color: #000;
   margin-bottom: clamp(10px, 2.6666666667vw, 20px);
+  text-align: justify;
 }
 .voice-section .voice-other-wrap {
   text-align: center;
@@ -2472,6 +2505,7 @@ footer {
   font-feature-settings: "palt";
   line-height: 1.8;
   letter-spacing: 0.05em;
+  text-align: justify;
 }
 .about-section .about-section-achievements {
   margin-top: clamp(40px, 10.6666666667vw, 80px);
@@ -2595,6 +2629,7 @@ footer {
   max-width: clamp(300px, 80vw, 600px);
   margin-inline: auto;
   font-feature-settings: "palt";
+  text-align: justify;
 }
 .about-section .about-section-message .message-description {
   font-size: clamp(12px, 3.2vw, 24px);
@@ -2605,6 +2640,7 @@ footer {
   max-width: clamp(300px, 80vw, 600px);
   margin-inline: auto;
   font-feature-settings: "palt";
+  text-align: justify;
 }
 
 /*cta-section*/

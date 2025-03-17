@@ -263,6 +263,13 @@
         p {
             font-size: vw(12);
             font-weight: bold;
+
+            &.bottom-900 {
+                @include media(sp) {
+                    position: relative;
+                    top: -5px;
+                }
+            }
         }
 
         .features--24hours {
@@ -283,6 +290,13 @@
             span {
                 display: block;
             }
+
+            &.highlight-900 {
+                @include media(sp) {
+                    position: relative;
+                    top: -5px;
+                }
+            }
         }
 
         span.features--highlight {
@@ -299,6 +313,8 @@
             font-size: vw(12);
             font-weight: bold;
         }
+
+
     }
 }
 
