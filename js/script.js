@@ -145,22 +145,21 @@ window.onload = function () {
 };
 
 
-// SplitType & GSAP アニメーション
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
     function initAnimation() {
-        // **すべての .split-text 要素を取得**
+        // **.split-text の要素を取得**
         const splitElements = document.querySelectorAll(".split-text");
 
         splitElements.forEach(element => {
-            // **既存の SplitType を削除し、新しく適用**
+            // **SplitType を再適用**
             element.innerHTML = element.textContent;
             const splitText = new SplitType(element, {
                 types: "chars"
             });
 
-            let triggerStart = "top bottom"; // **発火タイミングを要素が画面下に入った瞬間に**
+            let triggerStart = "top bottom"; // **発火タイミング**
 
             gsap.to(splitText.chars, {
                 y: 0,
@@ -175,30 +174,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 scrollTrigger: {
                     trigger: element,
                     start: triggerStart,
-                    toggleActions: "play none none reset", // **スクロールを戻したらリセット**
-                    once: true, // **スクロールを戻しても再実行**
-                    scrub: false, // **true にするとスクロールに応じて徐々に発火**
-                },
-                onComplete: function () {
-                    gsap.to(element, {
-                        "--border-width": "100%", // CSS変数を変更
-                        duration: 0.1,
-                        ease: "power2.out",
-                    });
+                    toggleActions: "play none none reset", // **戻ったらリセット**
+                    scrub: 0.5, // **スムーズに再生**
                 }
             });
         });
 
-        // **スクロールトリガーをリフレッシュ**
         ScrollTrigger.refresh();
     }
 
-    // **初回実行**
     initAnimation();
 
-    // **ウィンドウリサイズ時にアニメーションを再初期化**
+    // **ウィンドウリサイズ時にアニメーションを再適用**
     window.addEventListener("resize", function () {
-        // **SplitType の再適用（リサイズ時に再分割）**
         document.querySelectorAll(".split-text").forEach(element => {
             element.innerHTML = element.textContent;
         });
@@ -207,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// **スクロールアニメーション**
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -215,75 +204,106 @@ document.addEventListener("DOMContentLoaded", function () {
             gsap.from(target, {
                 autoAlpha: 0,
                 y: 10,
-                duration: options.duration || 0.8, // 少し長くしてスムーズに
+                duration: options.duration || 0.8,
                 ease: options.ease || "power2.out",
                 scrollTrigger: {
                     trigger: target,
-                    start: options.start || "top bottom-=50", // 早めに発火
+                    start: options.start || "top bottom-=50",
                     toggleActions: "play none none none",
-                    scrub: 0.5 // スクロールに応じて動作
+                    scrub: 0.5
                 }
             });
         });
     }
 
-    // **通常のフェードイン**
     fadeInAnimation('.js-fadeIn');
-
-    // **早めのフェードイン（-soon）**
     fadeInAnimation('.js-fadeIn-soon', {
         start: "top 90%"
     });
 
     // **連続ポップアップ**
-    ScrollTrigger.batch(".js-popUps", {
-        interval: 0.1,
-        batchMax: 2, // 一度に処理する最大要素数を制限
+    ScrollTrigger.batch(".js-popUps, .js-popUps-soon", {
+        interval: 0.2,
+        batchMax: 2,
         onEnter: batch => gsap.to(batch, {
             scale: 1,
             autoAlpha: 1,
             y: 0,
             ease: "power2.out",
-            duration: 0.4, // 長すぎると重くなるので調整
+            duration: 0.4,
             stagger: 0.2
         }),
-        start: "top bottom-=100"
+        start: "top bottom-=100",
+        scrub: 0.5
     });
 
-    // **SVG アニメーション**
-    gsap.set(".svg-message path", {
-        strokeDasharray: (i, target) => target.getTotalLength(),
-        strokeDashoffset: (i, target) => target.getTotalLength(),
-        fill: "transparent"
+    // **左右フェードイン**
+    ScrollTrigger.batch(".fadeInRight, .fadeInLeft, .fadeInRight-soon, .fadeInLeft-soon", {
+        interval: 0.2,
+        batchMax: 2,
+        onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out"
+        }),
+        start: "top 75%",
+        scrub: 0.5
     });
 
-    gsap.to(".svg-message path", {
-        strokeDashoffset: 0,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: ".message-title-en",
-            start: "top 80%",
-            toggleActions: "play none none none",
-            scrub: 0.5
-        },
-        onComplete: () => {
-            gsap.to(".svg-message path", {
-                fill: "rgb(58, 156, 255)",
-                duration: 0.7,
-                ease: "power2.out"
-            });
-        }
+    fadeInAnimation(".fadeInUp");
+    fadeInAnimation(".js-fadeInUp-soon", {
+        start: "top 75%"
     });
 
-    // **帯アニメーション**
-    gsap.set([".text__ribbon-bg", ".text__first-bg", ".text__second-bg", ".text__third-bg", ".bottom__first-bg", ".bottom__second-bg"], {
-        scaleX: 0
+    // **連続ポップイン（move）**
+    ScrollTrigger.batch(".js-popUps-move .solution--item", {
+        interval: 0.2,
+        batchMax: 2,
+        onEnter: batch => gsap.to(batch, {
+            autoAlpha: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.2,
+            stagger: 0.2
+        }),
+        start: "top bottom",
+        scrub: 0.5
     });
-    gsap.set([".text__ribbon-item", ".text__word", ".bottom___word"], {
-        opacity: 0
+});
+
+// **カウントアップ**
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray(".count-num").forEach(target => {
+        gsap.fromTo(target, {
+            innerHTML: 0
+        }, {
+            innerHTML: target.dataset.count || 2000,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: target,
+                start: "top 80%",
+                toggleActions: "play none none none",
+                scrub: 0.5
+            },
+            snap: {
+                innerHTML: 1
+            },
+            onUpdate: function () {
+                target.innerHTML = Math.floor(target.innerHTML);
+            }
+        });
     });
+});
+
+// **帯アニメーション**
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
 
     ScrollTrigger.batch(".text__ribbon, .profile-detail, .about-section-message", {
         interval: 0.2,
@@ -309,60 +329,30 @@ document.addEventListener("DOMContentLoaded", function () {
         start: "top 75%",
         scrub: 0.5
     });
-
-    // **カウントアップ**
-    gsap.utils.toArray(".count-num").forEach(target => {
-        gsap.fromTo(target, {
-            innerHTML: 0
-        }, {
-            innerHTML: target.dataset.count || 2000,
-            duration: 1.5, // 滑らかにするため少し長く
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: target,
-                start: "top 80%",
-                toggleActions: "play none none none",
-                scrub: 0.5
-            },
-            snap: {
-                innerHTML: 1
-            },
-            onUpdate: function () {
-                target.innerHTML = Math.floor(target.innerHTML);
-            }
-        });
-    });
-
 });
 
-
-// SVG アニメーション
+// **SVG アニメーション**
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
-    // SVG の各パス要素を取得
-    const svgPaths = document.querySelectorAll(".svg-message path");
-
-    // 初期設定: stroke-dasharray と stroke-dashoffset を設定
-    gsap.set(svgPaths, {
+    gsap.set(".svg-message path", {
         strokeDasharray: (i, target) => target.getTotalLength(),
         strokeDashoffset: (i, target) => target.getTotalLength(),
         fill: "transparent"
     });
 
-    // アニメーション
-    gsap.to(svgPaths, {
+    gsap.to(".svg-message path", {
         strokeDashoffset: 0,
-        stagger: 0.2, // 順番に描かれるように
+        stagger: 0.2,
         duration: 1,
         ease: "power2.out",
         scrollTrigger: {
-            trigger: ".message-title-en", // **発火するトリガーを指定**
-            start: "top 80%", // 画面の80%に達したら開始
+            trigger: ".message-title-en",
+            start: "top 80%",
             toggleActions: "play none none none",
+            scrub: 0.5
         },
         onComplete: () => {
-            // 塗りつぶしを適用
             gsap.to(".svg-message path", {
                 fill: "rgb(58, 156, 255)",
                 duration: 0.7,
