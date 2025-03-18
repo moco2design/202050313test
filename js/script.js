@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 types: "chars"
             });
 
-            let triggerStart = window.innerWidth < 768 ? "top 100%" : "top 100%";
+            let triggerStart = "top bottom"; // **発火タイミングを要素が画面下に入った瞬間に**
 
             gsap.to(splitText.chars, {
                 y: 0,
@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 scrollTrigger: {
                     trigger: element,
                     start: triggerStart,
-                    toggleActions: "play none none none",
+                    toggleActions: "play none none reset", // **スクロールを戻したらリセット**
+                    once: false, // **スクロールを戻しても再実行**
+                    scrub: false, // **true にするとスクロールに応じて徐々に発火**
                 },
                 onComplete: function () {
                     gsap.to(element, {
@@ -138,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
         initAnimation();
     });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
