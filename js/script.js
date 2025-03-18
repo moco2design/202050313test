@@ -68,6 +68,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+//FAQ
+window.onload = function () {
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+        const question = item.querySelector(".faq-question");
+
+        question.addEventListener("click", function () {
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove("active");
+                }
+            });
+
+            item.classList.toggle("active");
+        });
+    });
+};
 
 
 // SplitType & GSAP アニメーション
@@ -484,41 +502,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// SVG アニメーション
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // SVG の各パス要素を取得
-    const svgPaths = document.querySelectorAll(".svg-message path");
-
-    // 初期設定: stroke-dasharray と stroke-dashoffset を設定
-    gsap.set(svgPaths, {
-        strokeDasharray: (i, target) => target.getTotalLength(),
-        strokeDashoffset: (i, target) => target.getTotalLength(),
-        fill: "transparent"
-    });
-
-    // アニメーション
-    gsap.to(svgPaths, {
-        strokeDashoffset: 0,
-        stagger: 0.2, // 順番に描かれるように
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: ".message-title-en", // **発火するトリガーを指定**
-            start: "top 80%", // 画面の80%に達したら開始
-            toggleActions: "play none none none",
-        },
-        onComplete: () => {
-            // 塗りつぶしを適用
-            gsap.to(".svg-message path", {
-                fill: "rgb(58, 156, 255)",
-                duration: 0.7,
-                ease: "power2.out"
-            });
-        }
-    });
-});
 
 //ループスライド
 document.addEventListener("DOMContentLoaded", function () {
