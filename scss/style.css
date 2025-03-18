@@ -167,61 +167,6 @@ footer {
   transition: transfrom 0.5s;
 }
 
-.js-fadeIn {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.js-popUp {
-  transform: scale(0.9);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-}
-
-.js-popUp > div {
-  transform: scale(0.9);
-  opacity: 0;
-  visibility: hidden;
-}
-
-.js-popUp-soon {
-  transform: scale(0.9);
-  opacity: 0;
-  visibility: hidden;
-}
-
-.js-fadeInUp-soon {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(80px);
-}
-
-.fadeInRight {
-  transform: translateX(80px);
-  opacity: 0;
-}
-
-.fadeInLeft {
-  transform: translateX(-80px);
-  opacity: 0;
-}
-
-/* 早めのフェードイン */
-.fadeInRight-soon {
-  transform: translateX(80px);
-  opacity: 0;
-}
-
-.fadeInLeft-soon {
-  transform: translateX(-80px);
-  opacity: 0;
-}
-
-.fadeInUp {
-  transform: translateY(20px);
-}
-
 .text__ribbon {
   position: relative;
   display: inline-block;
