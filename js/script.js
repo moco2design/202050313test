@@ -5,6 +5,63 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+//ループスライド
+document.addEventListener("DOMContentLoaded", function () {
+    const swiperConfigs = [{
+            selector: ".swiper-loop01",
+            slidesPerView: "auto",
+            speed: 30000
+        },
+        {
+            selector: ".swiper-loop01-2",
+            slidesPerView: "auto",
+            speed: 30000,
+            reverse: true
+        },
+        {
+            selector: ".swiper-loop01-3",
+            slidesPerView: "auto",
+            speed: 30000
+        },
+        {
+            selector: ".swiper-loop02",
+            slidesPerView: 1,
+            speed: 20000
+        },
+        {
+            selector: ".swiper-loop03",
+            slidesPerView: 1,
+            speed: 20000
+        },
+        {
+            selector: ".swiper-loop04",
+            slidesPerView: 1,
+            speed: 20000
+        },
+        {
+            selector: ".swiper-loop05",
+            slidesPerView: 1,
+            speed: 20000
+        }
+    ];
+
+    swiperConfigs.forEach(config => {
+        new Swiper(config.selector, {
+            loop: true,
+            slidesPerView: config.slidesPerView,
+            speed: config.speed,
+            allowTouchMove: false,
+            autoplay: {
+                delay: 0,
+                reverseDirection: config.reverse || false // 逆方向スライドの設定
+            }
+        });
+    });
+
+    console.log("All Swipers initialized successfully!");
+});
+
 //reason-carousel
 document.addEventListener("DOMContentLoaded", function () {
     const swiperConfigs = [{
@@ -88,7 +145,190 @@ window.onload = function () {
 };
 
 
+// SplitType & GSAP アニメーション
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
 
+    function initAnimation() {
+        // **すべての .split-text 要素を取得**
+        const splitElements = document.querySelectorAll(".split-text");
+
+        splitElements.forEach(element => {
+            // **既存の SplitType を削除し、新しく適用**
+            element.innerHTML = element.textContent;
+            const splitText = new SplitType(element, {
+                types: "chars"
+            });
+
+            let triggerStart = "top bottom"; // **発火タイミングを要素が画面下に入った瞬間に**
+
+            gsap.to(splitText.chars, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.02,
+                duration: 0.2,
+                ease: "power2.out",
+                startAt: {
+                    y: 50,
+                    opacity: 0
+                },
+                scrollTrigger: {
+                    trigger: element,
+                    start: triggerStart,
+                    toggleActions: "play none none reset", // **スクロールを戻したらリセット**
+                    once: true, // **スクロールを戻しても再実行**
+                    scrub: false, // **true にするとスクロールに応じて徐々に発火**
+                },
+                onComplete: function () {
+                    gsap.to(element, {
+                        "--border-width": "100%", // CSS変数を変更
+                        duration: 0.1,
+                        ease: "power2.out",
+                    });
+                }
+            });
+        });
+
+        // **スクロールトリガーをリフレッシュ**
+        ScrollTrigger.refresh();
+    }
+
+    // **初回実行**
+    initAnimation();
+
+    // **ウィンドウリサイズ時にアニメーションを再初期化**
+    window.addEventListener("resize", function () {
+        // **SplitType の再適用（リサイズ時に再分割）**
+        document.querySelectorAll(".split-text").forEach(element => {
+            element.innerHTML = element.textContent;
+        });
+        initAnimation();
+    });
+});
+
+
+//スクロールアニメーション
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    function fadeInAnimation(selector, options = {}) {
+        gsap.utils.toArray(selector).forEach(target => {
+            gsap.from(target, {
+                autoAlpha: 0,
+                y: 10,
+                duration: options.duration || 0.6,
+                ease: options.ease || "power2.out",
+                scrollTrigger: {
+                    trigger: target,
+                    start: options.start || "top bottom-=100", // **発火を少し早める**
+                    toggleActions: "play none none none",
+                    scrub: 0.5 // **スクロールと連動して滑らかにする**
+                }
+            });
+        });
+    }
+
+    // **通常のフェードイン**
+    fadeInAnimation('.js-fadeIn');
+
+    // **早めのフェードイン（-soon）**
+    fadeInAnimation('.js-fadeIn-soon', {
+        start: "top 90%"
+    });
+
+    // **連続ポップアップを一括処理**
+    ScrollTrigger.batch(".js-popUps", {
+        interval: 0.1, // **処理の間隔を設定**
+        batchMax: 3, // **一度に処理する最大要素数**
+        onEnter: batch => gsap.to(batch, {
+            scale: 1,
+            autoAlpha: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.3,
+            stagger: 0.2, // **stagger を増やす**
+        }),
+        start: "top bottom-=100"
+    });
+
+    // **早めの連続ポップアップ**
+    ScrollTrigger.batch(".js-popUps-soon", {
+        interval: 0.1,
+        batchMax: 2,
+        onEnter: batch => gsap.to(batch, {
+            scale: 1,
+            autoAlpha: 1,
+            ease: "power2.out",
+            stagger: 0.15,
+        }),
+        start: "top 85%"
+    });
+
+    // **左右フェードイン**
+    function sideFadeIn(selector, startPos = "top bottom") {
+        gsap.utils.toArray(selector).forEach(element => {
+            gsap.from(element, {
+                autoAlpha: 0,
+                x: selector.includes("Right") ? 50 : -50,
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: element,
+                    start: startPos,
+                    toggleActions: "play none none none",
+                    scrub: 0.5
+                }
+            });
+        });
+    }
+
+    sideFadeIn(".fadeInRight");
+    sideFadeIn(".fadeInLeft");
+
+    // **下からフェードイン**
+    fadeInAnimation(".fadeInUp");
+
+    // **早めのスライドアップ＆フェードイン**
+    ScrollTrigger.batch('.js-fadeInUp-soon', {
+        interval: 0.1,
+        batchMax: 2,
+        onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            visibility: "visible",
+            y: 0,
+            duration: 0.8,
+            autoAlpha: 1,
+            ease: "power2.out",
+            stagger: 0.15,
+        }),
+        start: "top 75%"
+    });
+
+    // **連続ポップイン**
+    let items = gsap.utils.toArray(".js-popUps-move .solution--item");
+
+    gsap.fromTo(
+        items, {
+            autoAlpha: 0,
+            scale: 1,
+            x: (i) => (i % 2 === 0 ? -50 : 50),
+            y: 20
+        }, {
+            autoAlpha: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.3,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".js-popUps-move",
+                start: "top bottom-=50",
+                scrub: 0.5
+            }
+        }
+    );
+});
 
 
 // カウントアップ
@@ -121,7 +361,147 @@ document.addEventListener("DOMContentLoaded", function () {
     animateCountUp();
 });
 
+//帯アニメーション①
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
 
+    var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".text__ribbon",
+            start: "top 80%", // `.text__ribbon` が画面の80%に到達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    var firstBg = document.querySelectorAll('.text__ribbon-bg'), // 最初の帯
+        word = document.querySelectorAll('.text__ribbon-item'), // テキスト
+        whiteBg = document.querySelectorAll('.white-bg'); // 文字の背景として残す
+
+    tl.to(firstBg, {
+            duration: 0.2, // 背景の拡張を少し遅く
+            scaleX: 1,
+        })
+
+        // 文字の不透明度を 0 のままにして、`firstBg` が隠れている状態で出現
+        .set(word, {
+            opacity: 1
+        })
+
+        // 背景を閉じる（`firstBg` のみ閉じる）+ `whiteBg` 同時スライドイン
+        .to(firstBg, {
+            duration: 0.3,
+            scaleX: 0,
+        })
+
+        .to(whiteBg, {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `firstBg` の閉じる動きと同時に `whiteBg` を表示
+});
+
+// 帯アニメーション②
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // **`.text__first-bg` などの初期状態を明示的に指定**
+    gsap.set([".text__first-bg", ".text__second-bg", ".text__third-bg"], {
+        scaleX: 0
+    });
+
+    gsap.set(".text__word", {
+        opacity: 0
+    });
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".profile-detail", // 🔹 発火の基準となる要素
+            start: "top 75%", // 画面の75%に達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    tl.to(".text__first-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__second-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__third-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__word", {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.2") // 🔹 文字の表示を少し遅らせる
+        .to(".text__first-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".text__second-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".text__third-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        });
+});
+
+
+//帯アニメーション③
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // **初期状態を設定**
+    gsap.set([".bottom__first-bg", ".bottom__second-bg"], {
+        scaleX: 0
+    });
+    gsap.set(".bottom___word", {
+        opacity: 0
+    });
+    gsap.set(".bottom__white-bg", {
+        opacity: 0
+    });
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about-section-message", // 🔹 発火の基準となる要素
+            start: "top 75%", // 画面の75%に達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    tl.to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        // **`.bottom___word` の opacity を変更（アニメーション中に現れる）**
+        .to(".bottom___word", {
+            duration: 0.1,
+            opacity: 1,
+        }, "-=0.2") // 🔹 文字の表示を少し遅らせる
+        // **背景を閉じる**
+        .to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        // **`.bottom__white-bg` を表示して、文字の背景として残す**
+        .to(".bottom__white-bg", {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `.bottom__first-bg` の閉じる動きと同時に発火
+});
 
 
 // SVG アニメーション
@@ -158,60 +538,4 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
-});
-
-//ループスライド
-document.addEventListener("DOMContentLoaded", function () {
-    const swiperConfigs = [{
-            selector: ".swiper-loop01",
-            slidesPerView: "auto",
-            speed: 30000
-        },
-        {
-            selector: ".swiper-loop01-2",
-            slidesPerView: "auto",
-            speed: 30000,
-            reverse: true
-        },
-        {
-            selector: ".swiper-loop01-3",
-            slidesPerView: "auto",
-            speed: 30000
-        },
-        {
-            selector: ".swiper-loop02",
-            slidesPerView: 1,
-            speed: 20000
-        },
-        {
-            selector: ".swiper-loop03",
-            slidesPerView: 1,
-            speed: 20000
-        },
-        {
-            selector: ".swiper-loop04",
-            slidesPerView: 1,
-            speed: 20000
-        },
-        {
-            selector: ".swiper-loop05",
-            slidesPerView: 1,
-            speed: 20000
-        }
-    ];
-
-    swiperConfigs.forEach(config => {
-        new Swiper(config.selector, {
-            loop: true,
-            slidesPerView: config.slidesPerView,
-            speed: config.speed,
-            allowTouchMove: false,
-            autoplay: {
-                delay: 0,
-                reverseDirection: config.reverse || false // 逆方向スライドの設定
-            }
-        });
-    });
-
-    console.log("All Swipers initialized successfully!");
 });
