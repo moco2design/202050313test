@@ -356,3 +356,67 @@ footer {
 .svg-message.active .svg-elem-7 {
   fill: rgb(58, 156, 255);
 }
+
+
+/* フェードインの共通設定 */
+.fadeIn,
+.fadeInUp,
+.fadeInRight,
+.fadeInLeft,
+.js-popUps>*,
+.js-popUps-soon>*,
+.js-popUps-move .solution--item {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* フェードイン */
+.fadeIn.active,
+.fadeInUp.active,
+.fadeInRight.active,
+.fadeInLeft.active,
+.js-popUps>*.active,
+.js-popUps-soon>*.active,
+.js-popUps-move .solution--item.active {
+  opacity: 1;
+}
+
+/* 下からフェードイン */
+.fadeInUp {
+  transform: translateY(20px);
+}
+
+.fadeInUp.active {
+  transform: translateY(0);
+}
+
+/* 右からフェードイン */
+.fadeInRight {
+  transform: translateX(50px);
+}
+
+.fadeInRight.active {
+  transform: translateX(0);
+}
+
+/* 左からフェードイン */
+.fadeInLeft {
+  transform: translateX(-50px);
+}
+
+.fadeInLeft.active {
+  transform: translateX(0);
+}
+
+/* スライドアップ（ポップアップ） */
+.js-popUps>*,
+.js-popUps-soon>*,
+.js-popUps-move .solution--item {
+  transform: scale(0.9) translateY(20px);
+}
+
+.js-popUps>*.active,
+.js-popUps-soon>*.active,
+.js-popUps-move .solution--item.active {
+  transform: scale(1) translateY(0);
+}

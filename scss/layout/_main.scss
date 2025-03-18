@@ -2101,6 +2101,12 @@
             position: relative;
             top: vw(6);
 
+            .svg-message path {
+                fill: transparent;
+                transition: fill 1s ease-in-out;
+            }
+
+
             @include media(sp) {
                 top: vw(12);
             }

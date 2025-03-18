@@ -144,22 +144,114 @@ window.onload = function () {
     });
 };
 
+// カウントアップ
+document.addEventListener("DOMContentLoaded", function () {
+    function animateCountUp() {
+        document.querySelectorAll(".count-num").forEach(target => {
+            const targetValue = parseInt(target.dataset.count) || 2000; // `data-count` 属性 or デフォルト2000
+            const duration = 1000; // 1秒
+            const startTime = performance.now();
 
+            function updateCount(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1); // 0 〜 1 に制限
+                target.innerHTML = Math.floor(progress * targetValue); // 小数を防ぐ
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    target.innerHTML = targetValue; // 最終値をセット
+                }
+            }
+
+            requestAnimationFrame(updateCount);
+        });
+    }
+
+    function setupScrollTrigger() {
+        const countElements = document.querySelectorAll(".count-num");
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCountUp();
+                    observer.unobserve(entry.target); // **1回だけ実行**
+                }
+            });
+        }, {
+            threshold: 0.8
+        }); // **80% 画面内に入ったら発火**
+
+        countElements.forEach(element => observer.observe(element));
+    }
+
+    setupScrollTrigger();
+});
+
+// SVG アニメーション
+document.addEventListener("DOMContentLoaded", function () {
+    function animateSVGPath(path) {
+        const length = path.getTotalLength(); // 線の長さを取得
+        path.style.strokeDasharray = length; // 線の長さを適用
+        path.style.strokeDashoffset = length; // 最初は見えない状態
+        path.style.transition = "none"; // アニメーション前にリセット
+
+        let startTime;
+
+        function drawPath(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / 1000, 1); // 1秒で完了
+            path.style.strokeDashoffset = length * (1 - progress);
+
+            if (progress < 1) {
+                requestAnimationFrame(drawPath);
+            } else {
+                // 塗りを適用（じわっと変化）
+                path.style.transition = "fill 1s ease-in-out"; // 塗りのトランジション
+                path.style.fill = "rgb(58, 156, 255)";
+            }
+        }
+
+        requestAnimationFrame(drawPath);
+    }
+
+    function setupSVGAnimation() {
+        const svgPaths = document.querySelectorAll(".svg-message path");
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    svgPaths.forEach(path => animateSVGPath(path));
+                    observer.disconnect(); // **1回だけ実行**
+                }
+            });
+        }, {
+            threshold: 0.8
+        }); // **80% 画面内に入ったら発火**
+
+        document.querySelectorAll(".message-title-en").forEach(el => observer.observe(el));
+    }
+
+    setupSVGAnimation();
+});
+
+
+// SplitType & GSAP アニメーション
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
     function initAnimation() {
-        // **.split-text の要素を取得**
+        // **すべての .split-text 要素を取得**
         const splitElements = document.querySelectorAll(".split-text");
 
         splitElements.forEach(element => {
-            // **SplitType を再適用**
+            // **既存の SplitType を削除し、新しく適用**
             element.innerHTML = element.textContent;
             const splitText = new SplitType(element, {
                 types: "chars"
             });
 
-            let triggerStart = "top bottom"; // **発火タイミング**
+            let triggerStart = "top bottom"; // **発火タイミングを要素が画面下に入った瞬間に**
 
             gsap.to(splitText.chars, {
                 y: 0,
@@ -174,19 +266,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 scrollTrigger: {
                     trigger: element,
                     start: triggerStart,
-                    toggleActions: "play none none reset", // **戻ったらリセット**
-                    scrub: 0.5, // **スムーズに再生**
+                    toggleActions: "play none none reset", // **スクロールを戻したらリセット**
+                    once: true, // **スクロールを戻しても再実行**
+                    scrub: false, // **true にするとスクロールに応じて徐々に発火**
+                },
+                onComplete: function () {
+                    gsap.to(element, {
+                        "--border-width": "100%", // CSS変数を変更
+                        duration: 0.1,
+                        ease: "power2.out",
+                    });
                 }
             });
         });
 
+        // **スクロールトリガーをリフレッシュ**
         ScrollTrigger.refresh();
     }
 
+    // **初回実行**
     initAnimation();
 
-    // **ウィンドウリサイズ時にアニメーションを再適用**
+    // **ウィンドウリサイズ時にアニメーションを再初期化**
     window.addEventListener("resize", function () {
+        // **SplitType の再適用（リサイズ時に再分割）**
         document.querySelectorAll(".split-text").forEach(element => {
             element.innerHTML = element.textContent;
         });
@@ -195,169 +298,211 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// **スクロールアニメーション**
+//スクロールアニメーション
 document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    function fadeInAnimation(selector, options = {}) {
-        gsap.utils.toArray(selector).forEach(target => {
-            gsap.from(target, {
-                autoAlpha: 0,
-                y: 10,
-                duration: options.duration || 0.8,
-                ease: options.ease || "power2.out",
-                scrollTrigger: {
-                    trigger: target,
-                    start: options.start || "top bottom-=50",
-                    toggleActions: "play none none none",
-                    scrub: 0.5
+    function observeElements(selector, options = {}) {
+        const elements = document.querySelectorAll(selector);
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active"); // **アニメーション開始**
+                    observer.unobserve(entry.target); // **一度だけ実行**
                 }
             });
+        }, {
+            threshold: options.threshold || 0.5
         });
+
+        elements.forEach(element => observer.observe(element));
     }
 
-    fadeInAnimation('.js-fadeIn');
-    fadeInAnimation('.js-fadeIn-soon', {
-        start: "top 90%"
-    });
-
-    // **連続ポップアップ**
-    ScrollTrigger.batch(".js-popUps, .js-popUps-soon", {
-        interval: 0.2,
-        batchMax: 2,
-        onEnter: batch => gsap.to(batch, {
-            scale: 1,
-            autoAlpha: 1,
-            y: 0,
-            ease: "power2.out",
-            duration: 0.4,
-            stagger: 0.2
-        }),
-        start: "top bottom-=100",
-        scrub: 0.5
+    // **単体フェードイン**
+    observeElements(".js-fadeIn");
+    observeElements(".js-fadeIn-soon", {
+        threshold: 0.8
     });
 
     // **左右フェードイン**
-    ScrollTrigger.batch(".fadeInRight, .fadeInLeft, .fadeInRight-soon, .fadeInLeft-soon", {
-        interval: 0.2,
-        batchMax: 2,
-        onEnter: batch => gsap.to(batch, {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: "power2.out"
-        }),
-        start: "top 75%",
-        scrub: 0.5
+    observeElements(".fadeInRight");
+    observeElements(".fadeInRight-soon", {
+        threshold: 0.8
+    });
+    observeElements(".fadeInLeft");
+    observeElements(".fadeInLeft-soon", {
+        threshold: 0.8
     });
 
-    fadeInAnimation(".fadeInUp");
-    fadeInAnimation(".js-fadeInUp-soon", {
-        start: "top 75%"
+    // **スライドアップフェードイン**
+    observeElements(".fadeInUp");
+    observeElements(".js-fadeInUp-soon", {
+        threshold: 0.8
     });
 
-    // **連続ポップイン（move）**
-    ScrollTrigger.batch(".js-popUps-move .solution--item", {
-        interval: 0.2,
-        batchMax: 2,
-        onEnter: batch => gsap.to(batch, {
-            autoAlpha: 1,
-            scale: 1,
-            x: 0,
-            y: 0,
-            ease: "power2.out",
-            duration: 0.2,
-            stagger: 0.2
-        }),
-        start: "top bottom",
-        scrub: 0.5
-    });
-});
-
-// **カウントアップ**
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray(".count-num").forEach(target => {
-        gsap.fromTo(target, {
-            innerHTML: 0
+    // **連続ポップアップ**
+    function observeStaggered(selector, delay = 100) {
+        const elements = document.querySelectorAll(selector);
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add("active");
+                    }, index * delay);
+                    observer.unobserve(entry.target); // **一度だけ実行**
+                }
+            });
         }, {
-            innerHTML: target.dataset.count || 2000,
-            duration: 1.5,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: target,
-                start: "top 80%",
-                toggleActions: "play none none none",
-                scrub: 0.5
-            },
-            snap: {
-                innerHTML: 1
-            },
-            onUpdate: function () {
-                target.innerHTML = Math.floor(target.innerHTML);
-            }
+            threshold: 0.5
         });
-    });
+
+        elements.forEach(element => observer.observe(element));
+    }
+
+    observeStaggered(".js-popUps > *", 100);
+    observeStaggered(".js-popUps-soon > *", 80);
+    observeStaggered(".js-popUps-move .solution--item", 200);
 });
 
-// **帯アニメーション**
+
+
+
+//帯アニメーション①
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
-    ScrollTrigger.batch(".text__ribbon, .profile-detail, .about-section-message", {
-        interval: 0.2,
-        batchMax: 1,
-        onEnter: batch => {
-            gsap.to(batch, {
-                scaleX: 1,
-                duration: 0.3
-            });
-
-            gsap.to(".text__ribbon-item, .text__word, .bottom___word", {
-                opacity: 1,
-                duration: 0.3,
-                delay: 0.1
-            });
-
-            gsap.to(batch, {
-                scaleX: 0,
-                duration: 0.3,
-                delay: 0.3
-            });
-        },
-        start: "top 75%",
-        scrub: 0.5
-    });
-});
-
-// **SVG アニメーション**
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.set(".svg-message path", {
-        strokeDasharray: (i, target) => target.getTotalLength(),
-        strokeDashoffset: (i, target) => target.getTotalLength(),
-        fill: "transparent"
-    });
-
-    gsap.to(".svg-message path", {
-        strokeDashoffset: 0,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power2.out",
+    var tl = gsap.timeline({
         scrollTrigger: {
-            trigger: ".message-title-en",
-            start: "top 80%",
+            trigger: ".text__ribbon",
+            start: "top 80%", // `.text__ribbon` が画面の80%に到達したら発火
             toggleActions: "play none none none",
-            scrub: 0.5
-        },
-        onComplete: () => {
-            gsap.to(".svg-message path", {
-                fill: "rgb(58, 156, 255)",
-                duration: 0.7,
-                ease: "power2.out"
-            });
         }
     });
+
+    var firstBg = document.querySelectorAll('.text__ribbon-bg'), // 最初の帯
+        word = document.querySelectorAll('.text__ribbon-item'), // テキスト
+        whiteBg = document.querySelectorAll('.white-bg'); // 文字の背景として残す
+
+    tl.to(firstBg, {
+            duration: 0.2, // 背景の拡張を少し遅く
+            scaleX: 1,
+        })
+
+        // 文字の不透明度を 0 のままにして、`firstBg` が隠れている状態で出現
+        .set(word, {
+            opacity: 1
+        })
+
+        // 背景を閉じる（`firstBg` のみ閉じる）+ `whiteBg` 同時スライドイン
+        .to(firstBg, {
+            duration: 0.3,
+            scaleX: 0,
+        })
+
+        .to(whiteBg, {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `firstBg` の閉じる動きと同時に `whiteBg` を表示
+});
+
+// 帯アニメーション②
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // **`.text__first-bg` などの初期状態を明示的に指定**
+    gsap.set([".text__first-bg", ".text__second-bg", ".text__third-bg"], {
+        scaleX: 0
+    });
+
+    gsap.set(".text__word", {
+        opacity: 0
+    });
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".profile-detail", // 🔹 発火の基準となる要素
+            start: "top 75%", // 画面の75%に達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    tl.to(".text__first-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__second-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__third-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__word", {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.2") // 🔹 文字の表示を少し遅らせる
+        .to(".text__first-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".text__second-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".text__third-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        });
+});
+
+
+//帯アニメーション③
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // **初期状態を設定**
+    gsap.set([".bottom__first-bg", ".bottom__second-bg"], {
+        scaleX: 0
+    });
+    gsap.set(".bottom___word", {
+        opacity: 0
+    });
+    gsap.set(".bottom__white-bg", {
+        opacity: 0
+    });
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about-section-message", // 🔹 発火の基準となる要素
+            start: "top 75%", // 画面の75%に達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    tl.to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        // **`.bottom___word` の opacity を変更（アニメーション中に現れる）**
+        .to(".bottom___word", {
+            duration: 0.1,
+            opacity: 1,
+        }, "-=0.2") // 🔹 文字の表示を少し遅らせる
+        // **背景を閉じる**
+        .to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        // **`.bottom__white-bg` を表示して、文字の背景として残す**
+        .to(".bottom__white-bg", {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `.bottom__first-bg` の閉じる動きと同時に発火
 });
