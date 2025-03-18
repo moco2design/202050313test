@@ -376,7 +376,8 @@
 /* jirei bottom */
 .solution--jirei-bottom {
     background-image: url('../images/common/image_hougan1.png');
-    padding: vw(57) vw(20) vw(154);
+    background-size: contain;
+    padding: vw(57) vw(20) vw(110);
     text-align: left;
     position: relative;
     top: vw(-104);
@@ -1007,6 +1008,10 @@
                     height: vw(2.5);
                     background-color: #F8E538;
                     transition: width 0.5s ease-in-out;
+
+                    @include media(sp) {
+                        height: vw(4.5);
+                    }
                 }
             }
         }

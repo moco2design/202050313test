@@ -95,14 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 types: "chars"
             });
 
-            let triggerStart = window.innerWidth < 768 ? "top 90%" : "top 85%";
+            let triggerStart = window.innerWidth < 768 ? "top 100%" : "top 100%";
 
             gsap.to(splitText.chars, {
                 y: 0,
                 opacity: 1,
-                stagger: 0.03,
-                duration: 0.3,
-                ease: "power3.out",
+                stagger: 0.02,
+                duration: 0.2,
+                ease: "power2.out",
                 startAt: {
                     y: 50,
                     opacity: 0
@@ -115,8 +115,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 onComplete: function () {
                     gsap.to(element, {
                         "--border-width": "100%", // CSS変数を変更
-                        duration: 0.2,
-                        ease: "power3.out",
+                        duration: 0.1,
+                        ease: "power2.out",
                     });
                 }
             });
@@ -140,200 +140,181 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-//pop up
-/*フェードインアニメーション*/
-gsap.utils.toArray('.js-fadeIn').forEach(target => {
-    gsap.fromTo(target, {
-        autoAlpha: 0, // 最初は透明
-        y: 10 // 少し下に配置
-    }, {
-        autoAlpha: 1, // フェードイン
-        y: 0, // 元の位置に移動
-        duration: 1, // 1秒でアニメーション
-        delay: 0.2, // 0.2秒遅延
-        ease: "power3.out", // ふわっとした動き
-        scrollTrigger: {
-            trigger: target,
-            start: 'top 50%'
-        }
-    });
-});
-
-
-/*連続ポップインアップアニメーション*/
-gsap.utils.toArray('.js-popUps').forEach(target => {
-    var targets = target.querySelectorAll(':scope > *'); // target の直下にある要素を取得
-
-    gsap.fromTo(targets, {
-        scale: 0.9,
-        autoAlpha: 0,
-        y: 20 // 下から少し上がる動きを追加
-    }, {
-        scale: 1,
-        autoAlpha: 1,
-        y: 0,
-        ease: "power3.out",
-        stagger: {
-            each: 0.3, // 各要素が 0.2秒間隔で順番に出現
-            from: "start" // **上の要素から順にアニメーション**
-        },
-        scrollTrigger: {
-            trigger: target,
-            start: "top 70%", // 画面の 50% に来たら発火
-            toggleActions: "play none none none"
-        }
-    });
-});
-
-/*ポップインアニメーション*/
-gsap.utils.toArray('.js-popUp').forEach(target => {
-    gsap.to(target, {
-        scale: 1,
-        autoAlpha: 1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-            trigger: target,
-            start: 'bottom bottom'
-        }
-    })
-});
-
-
-//fade  soon
-gsap.utils.toArray('.js-fadeIn-soon').forEach(target => {
-    gsap.to(target, {
-        autoAlpha: 1,
-        scrollTrigger: {
-            trigger: target,
-            start: 'top bottom-=100'
-        }
-    })
-});
-
-gsap.utils.toArray('.js-popUp-soon').forEach(target => {
-    gsap.to(target, {
-        scale: 1,
-        autoAlpha: 1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-            trigger: target,
-            start: 'top bottom-=100',
-        }
-    });
-});
-
-// **新しいフェードイン＆スライドアップ（画像が少し見えたら発火）**
-gsap.utils.toArray('.js-fadeInUp-soon').forEach(target => {
-    gsap.to(target, {
-        opacity: 1,
-        visibility: "visible",
-        y: 0,
-        duration: 2,
-        autoAlpha: 1,
-        ease: "back.out(2.7)",
-        scrollTrigger: {
-            trigger: target,
-            start: 'top bottom-=300',
-            toggleActions: "play none none none"
-        }
-    });
-});
-
-/* **連続ポップインアップアニメーション** */
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
-    // `js-popUps` 内の `.solution--item` を取得
+    function fadeInAnimation(selector, options = {}) {
+        gsap.utils.toArray(selector).forEach(target => {
+            gsap.fromTo(target, {
+                autoAlpha: 0,
+                y: 10
+            }, {
+                autoAlpha: 1,
+                y: 0,
+                duration: options.duration || 0.6,
+                ease: options.ease || "power2.out",
+                scrollTrigger: {
+                    trigger: target,
+                    start: options.start || "bottom bottom",
+                    toggleActions: "play none none none"
+                }
+            });
+        });
+    }
+
+    // **通常のフェードイン**
+    fadeInAnimation('.js-fadeIn');
+
+    // **早めのフェードイン（-soon）**
+    fadeInAnimation('.js-fadeIn-soon', {
+        start: "top 80%"
+    });
+
+    // **連続ポップアップ**
+    gsap.utils.toArray('.js-popUps').forEach(target => {
+        var items = target.querySelectorAll(':scope > *');
+
+        gsap.fromTo(items, {
+            scale: 0.9,
+            autoAlpha: 0,
+            y: 20
+        }, {
+            scale: 1,
+            autoAlpha: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.3,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: target,
+                start: "bottom bottom",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+
+    // **早めの連続ポップアップ（-soon）**
+    gsap.utils.toArray('.js-popUps-soon').forEach(target => {
+        var items = target.querySelectorAll(':scope > *');
+
+        gsap.fromTo(items, {
+            scale: 0.9,
+            autoAlpha: 0
+        }, {
+            scale: 1,
+            autoAlpha: 1,
+            ease: "power2.out",
+            stagger: {
+                each: 0.08
+            },
+            scrollTrigger: {
+                trigger: target,
+                start: "top 80%"
+            }
+        });
+    });
+
+    // **通常の左右フェードイン**
+    function sideFadeIn(selector, startPos = "bottom bottom") {
+        gsap.utils.toArray(selector).forEach(element => {
+            gsap.to(element, {
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: element,
+                    start: startPos,
+                    toggleActions: "play none none none"
+                }
+            });
+        });
+    }
+
+    sideFadeIn(".fadeInRight", "bottom bottom");
+    sideFadeIn(".fadeInLeft", "bottom bottom");
+
+    // **早めの左右フェードイン（-soon）**
+    gsap.utils.toArray(".fadeInRight-soon").forEach(element => {
+        gsap.to(element, {
+            opacity: 1,
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: element,
+                start: "top 50%",
+                toggleActions: "play none none none"
+            },
+            onComplete: () => {
+                element.style.transform = "none"; // **translateXを解除**
+            }
+        });
+    });
+
+    gsap.utils.toArray(".fadeInLeft-soon").forEach(element => {
+        gsap.to(element, {
+            opacity: 1,
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: element,
+                start: "top 50%",
+                toggleActions: "play none none none"
+            },
+            onComplete: () => {
+                element.style.transform = "none"; // **translateXを解除**
+            }
+        });
+    });
+
+    // **下からフェードイン**
+    fadeInAnimation(".fadeInUp");
+
+    // **早めのスライドアップ＆フェードイン（-soon）**
+    gsap.utils.toArray('.js-fadeInUp-soon').forEach(target => {
+        gsap.to(target, {
+            opacity: 1,
+            visibility: "visible",
+            y: 0,
+            duration: 0.8,
+            autoAlpha: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: target,
+                start: "top 85%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+
+    // **連続ポップイン（move）**
     let items = gsap.utils.toArray(".js-popUps-move .solution--item");
 
     gsap.fromTo(
-        items,
-        // **初期状態**
-        {
-            autoAlpha: 0, // 透明
-            scale: 1, // 少し縮小
-            x: (i) => (i === items.length - 1 ? 0 : i % 2 === 0 ? -100 : 100), // **最後の要素だけ `x: 0` にする**
-            y: (i) => (i === items.length - 1 ? 100 : 0), // **最後の要素だけ `y: 100`**
-        },
-        // **アニメーション**
-        {
-            autoAlpha: 1, // 表示
-            scale: 1, // 拡大
-            x: 0, // 左右位置を元に戻す
-            y: 0, // 下からの移動を元に戻す
-            ease: "power3.out",
-            duration: 1.2,
-            stagger: 0.3, // 0.3秒ごとに順番に表示
+        items, {
+            autoAlpha: 0,
+            scale: 1,
+            x: (i) => (i % 2 === 0 ? -50 : 50),
+            y: 20
+        }, {
+            autoAlpha: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.2,
+            stagger: 0.2,
             scrollTrigger: {
                 trigger: ".js-popUps-move",
-                start: "top 50%", // トップが画面の50%に来たら発火
-                toggleActions: "play none none none",
-            },
+                start: "top bottom",
+                toggleActions: "play none none none"
+            }
         }
     );
-});
-
-/*連続ポップインアップアニメーション-soon*/
-gsap.utils.toArray('.js-popUps-soon').forEach(target => {
-    var targets = target.querySelectorAll(':scope > *'); //targetの直下に要素を取得
-    gsap.fromTo(targets, {
-        scale: .9,
-        autoAlpha: 0
-    }, {
-        scale: 1,
-        autoAlpha: 1,
-        delay: .2,
-        ease: "back.out(1.7)",
-        stagger: {
-            each: .08
-        },
-        scrollTrigger: {
-            trigger: target,
-            start: 'top center'
-        }
-    })
-});
-
-
-//帯アニメーション①
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    var tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".text__ribbon",
-            start: "top 80%", // `.text__ribbon` が画面の80%に到達したら発火
-            toggleActions: "play none none none",
-        }
-    });
-
-    var firstBg = document.querySelectorAll('.text__ribbon-bg'), // 最初の帯
-        word = document.querySelectorAll('.text__ribbon-item'), // テキスト
-        whiteBg = document.querySelectorAll('.white-bg'); // 文字の背景として残す
-
-    tl.to(firstBg, {
-            duration: 0.4, // 背景の拡張を少し遅く
-            scaleX: 1,
-            ease: "power2.out"
-        })
-
-        // 文字の不透明度を 0 のままにして、`firstBg` が隠れている状態で出現
-        .set(word, {
-            opacity: 1
-        })
-
-        // 背景を閉じる（`firstBg` のみ閉じる）+ `whiteBg` 同時スライドイン
-        .to(firstBg, {
-            duration: 0.5,
-            scaleX: 0,
-            ease: "power3.inOut"
-        })
-
-        .to(whiteBg, {
-            duration: 0.5,
-            opacity: 1,
-            ease: "power2.out"
-        }, "-=0.5"); // `firstBg` の閉じる動きと同時に `whiteBg` を表示
 });
 
 
@@ -367,6 +348,43 @@ document.addEventListener("DOMContentLoaded", function () {
     animateCountUp();
 });
 
+//帯アニメーション①
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".text__ribbon",
+            start: "top 80%", // `.text__ribbon` が画面の80%に到達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    var firstBg = document.querySelectorAll('.text__ribbon-bg'), // 最初の帯
+        word = document.querySelectorAll('.text__ribbon-item'), // テキスト
+        whiteBg = document.querySelectorAll('.white-bg'); // 文字の背景として残す
+
+    tl.to(firstBg, {
+            duration: 0.2, // 背景の拡張を少し遅く
+            scaleX: 1,
+        })
+
+        // 文字の不透明度を 0 のままにして、`firstBg` が隠れている状態で出現
+        .set(word, {
+            opacity: 1
+        })
+
+        // 背景を閉じる（`firstBg` のみ閉じる）+ `whiteBg` 同時スライドイン
+        .to(firstBg, {
+            duration: 0.3,
+            scaleX: 0,
+        })
+
+        .to(whiteBg, {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `firstBg` の閉じる動きと同時に `whiteBg` を表示
+});
 
 // 帯アニメーション②
 document.addEventListener("DOMContentLoaded", function () {
@@ -390,94 +408,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     tl.to(".text__first-bg", {
-            duration: 0.4,
+            duration: 0.1,
             scaleX: 1,
-            ease: "power2.out"
         })
         .to(".text__second-bg", {
-            duration: 0.4,
+            duration: 0.1,
             scaleX: 1,
-            ease: "power2.out"
         })
         .to(".text__third-bg", {
-            duration: 0.4,
+            duration: 0.1,
             scaleX: 1,
-            ease: "power2.out"
         })
         .to(".text__word", {
-            duration: 0.3,
+            duration: 0.2,
             opacity: 1,
-            ease: "power2.out"
         }, "-=0.2") // 🔹 文字の表示を少し遅らせる
         .to(".text__first-bg", {
-            duration: 0.4,
+            duration: 0.2,
             scaleX: 0,
-            ease: "power3.inOut"
         })
         .to(".text__second-bg", {
-            duration: 0.4,
+            duration: 0.2,
             scaleX: 0,
-            ease: "power3.inOut"
         })
         .to(".text__third-bg", {
-            duration: 0.4,
+            duration: 0.2,
             scaleX: 0,
-            ease: "power3.inOut"
         });
 });
-
-
-
-// 右・左からフェードイン
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.utils.toArray(".fadeInRight").forEach(function (element) {
-        gsap.to(element, {
-            opacity: 1,
-            x: 0, // 右からの移動を 0 に
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: element,
-                start: "top 70%",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-
-    // 左からフェードイン
-    gsap.utils.toArray(".fadeInLeft").forEach(function (element) {
-        gsap.to(element, {
-            opacity: 1,
-            x: 0, // 左からの移動を 0 に
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: element,
-                start: "top 70%",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-});
-
-// 下からフェードイン
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.utils.toArray(".fadeInUp").forEach(function (element) {
-        gsap.to(element, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: element,
-                start: "top 90%",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-
-});
-
 
 
 //帯アニメーション③
@@ -504,37 +462,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     tl.to(".bottom__first-bg", {
-            duration: 0.4,
+            duration: 0.2,
             scaleX: 1,
-            ease: "power2.out"
         })
         .to(".bottom__second-bg", {
-            duration: 0.4,
+            duration: 0.2,
             scaleX: 1,
-            ease: "power2.out"
         })
         // **`.bottom___word` の opacity を変更（アニメーション中に現れる）**
         .to(".bottom___word", {
-            duration: 0.3,
+            duration: 0.1,
             opacity: 1,
-            ease: "power2.out"
         }, "-=0.2") // 🔹 文字の表示を少し遅らせる
         // **背景を閉じる**
         .to(".bottom__first-bg", {
-            duration: 0.4,
+            duration: 0.2,
             scaleX: 0,
-            ease: "power3.inOut"
         })
         .to(".bottom__second-bg", {
-            duration: 0.4,
+            duration: 0.2,
             scaleX: 0,
-            ease: "power3.inOut"
         })
         // **`.bottom__white-bg` を表示して、文字の背景として残す**
         .to(".bottom__white-bg", {
-            duration: 0.5,
+            duration: 0.2,
             opacity: 1,
-            ease: "power2.out"
         }, "-=0.5"); // `.bottom__first-bg` の閉じる動きと同時に発火
 });
 
