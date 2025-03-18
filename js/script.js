@@ -330,6 +330,35 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// カウントアップ
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    function animateCountUp() {
+        gsap.utils.toArray(".count-num").forEach(target => {
+            gsap.fromTo(target, {
+                innerHTML: 0
+            }, {
+                innerHTML: target.dataset.count || 2000, // `data-count` 属性の値 or デフォルト2000
+                duration: 1, // カウントアップの時間
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: target,
+                    start: "top 80%", // 画面の80%に達したら開始
+                    toggleActions: "play none none none"
+                },
+                snap: {
+                    innerHTML: 1
+                }, // 数値を整数に丸める
+                onUpdate: function () {
+                    target.innerHTML = Math.floor(target.innerHTML); // 小数を防ぐ
+                }
+            });
+        });
+    }
+
+    animateCountUp();
+});
 
 //帯アニメーション①
 document.addEventListener("DOMContentLoaded", function () {
@@ -508,60 +537,4 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
-});
-
-//ループスライド
-document.addEventListener("DOMContentLoaded", function () {
-    const swiperConfigs = [{
-            selector: ".swiper-loop01",
-            slidesPerView: "auto",
-            speed: 30000
-        },
-        {
-            selector: ".swiper-loop01-2",
-            slidesPerView: "auto",
-            speed: 30000,
-            reverse: true
-        },
-        {
-            selector: ".swiper-loop01-3",
-            slidesPerView: "auto",
-            speed: 30000
-        },
-        {
-            selector: ".swiper-loop02",
-            slidesPerView: 1,
-            speed: 20000
-        },
-        {
-            selector: ".swiper-loop03",
-            slidesPerView: 1,
-            speed: 20000
-        },
-        {
-            selector: ".swiper-loop04",
-            slidesPerView: 1,
-            speed: 20000
-        },
-        {
-            selector: ".swiper-loop05",
-            slidesPerView: 1,
-            speed: 20000
-        }
-    ];
-
-    swiperConfigs.forEach(config => {
-        new Swiper(config.selector, {
-            loop: true,
-            slidesPerView: config.slidesPerView,
-            speed: config.speed,
-            allowTouchMove: false,
-            autoplay: {
-                delay: 0,
-                reverseDirection: config.reverse || false // 逆方向スライドの設定
-            }
-        });
-    });
-
-    console.log("All Swipers initialized successfully!");
 });
