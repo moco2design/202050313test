@@ -1,3 +1,12 @@
+//画像の遅延読み込み
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("img").forEach(img => {
+        img.setAttribute("loading", "lazy");
+    });
+});
+
+
+//reason-carousel
 document.addEventListener("DOMContentLoaded", function () {
     const swiperConfigs = [{
             selector: ".swiper-reason",
@@ -142,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
+//スクロールアニメーション
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
