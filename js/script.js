@@ -303,64 +303,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // SplitType & GSAP アニメーション
 document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    function initAnimation() {
-        // **すべての .split-text 要素を取得**
+    function initTextAnimation() {
         const splitElements = document.querySelectorAll(".split-text");
 
         splitElements.forEach(element => {
-            // **既存の SplitType を削除し、新しく適用**
-            element.innerHTML = element.textContent;
-            const splitText = new SplitType(element, {
-                types: "chars"
-            });
+            const nodes = Array.from(element.childNodes); // **子ノード（テキスト+タグ）を取得**
+            element.innerHTML = ""; // **元の内容をクリア**
 
-            let triggerStart = "top bottom"; // **発火タイミングを要素が画面下に入った瞬間に**
-
-            gsap.to(splitText.chars, {
-                y: 0,
-                opacity: 1,
-                stagger: 0.02,
-                duration: 0.2,
-                ease: "power2.out",
-                startAt: {
-                    y: 50,
-                    opacity: 0
-                },
-                scrollTrigger: {
-                    trigger: element,
-                    start: triggerStart,
-                    toggleActions: "play none none reset", // **スクロールを戻したらリセット**
-                    once: true, // **スクロールを戻しても再実行**
-                    scrub: false, // **true にするとスクロールに応じて徐々に発火**
-                },
-                onComplete: function () {
-                    gsap.to(element, {
-                        "--border-width": "100%", // CSS変数を変更
-                        duration: 0.1,
-                        ease: "power2.out",
+            nodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    // **通常のテキストを1文字ずつ分割**
+                    node.textContent.split("").forEach(char => {
+                        const span = document.createElement("span");
+                        span.textContent = char;
+                        span.classList.add("char"); // **アニメーション用クラス**
+                        element.appendChild(span);
                     });
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    // **タグ内の文字も分割**
+                    const spanWrapper = document.createElement("span");
+                    spanWrapper.className = node.className; // **元のクラスを適用**
+                    node.innerHTML.split("").forEach(char => {
+                        const span = document.createElement("span");
+                        span.textContent = char;
+                        span.classList.add("char");
+                        spanWrapper.appendChild(span);
+                    });
+                    element.appendChild(spanWrapper);
                 }
             });
-        });
 
-        // **スクロールトリガーをリフレッシュ**
-        ScrollTrigger.refresh();
+            const chars = element.querySelectorAll(".char"); // **アニメーション対象の文字**
+
+            // **IntersectionObserver で監視**
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        chars.forEach((char, index) => {
+                            setTimeout(() => {
+                                char.style.opacity = "1";
+                                char.style.transform = "translateY(0)";
+                            }, index * 20); // **20msずつ遅延**
+                        });
+
+                        // **最後の文字が表示された後に下線を伸ばす**
+                        setTimeout(() => {
+                            element.style.setProperty("--border-width", "100%");
+                        }, chars.length * 20);
+
+                        observer.unobserve(entry.target); // **1回のみ実行**
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            observer.observe(element);
+        });
     }
 
     // **初回実行**
-    initAnimation();
-
-    // **ウィンドウリサイズ時にアニメーションを再初期化**
-    window.addEventListener("resize", function () {
-        // **SplitType の再適用（リサイズ時に再分割）**
-        document.querySelectorAll(".split-text").forEach(element => {
-            element.innerHTML = element.textContent;
-        });
-        initAnimation();
-    });
+    initTextAnimation();
 });
+
+
+
 
 //帯アニメーション①
 document.addEventListener("DOMContentLoaded", function () {
