@@ -1266,6 +1266,7 @@ footer {
   align-items: center;
   width: clamp(320px, 85.3333333333vw, 640px);
   height: clamp(200px, 53.3333333333vw, 400px);
+  z-index: 10;
 }
 @media (max-width: 600px) {
   .solution--jirei-bottom .solution--sales {
@@ -1340,7 +1341,8 @@ footer {
   padding: clamp(138px, 36.8vw, 276px) 0 clamp(60px, 16vw, 120px);
   background-image: url(../images/common/image_line.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-attachment: fixed;
+  will-change: transform;
   background-position: center calc(100% - clamp(60px, 16vw, 120px));
 }
 .solution--reasons .solution--title {
@@ -1371,6 +1373,7 @@ footer {
   width: clamp(355px, 94.6666666667vw, 710px);
   margin-right: 0;
   margin-left: auto;
+  will-change: transform, opacity;
   /* carousel */
   /*// carousel*/
 }
@@ -1531,11 +1534,13 @@ footer {
   width: fit-content;
 }
 .solution--reasons .reason .carousel-container .swiper {
-  max-width: 500px;
+  will-change: transform;
 }
 .solution--reasons .reason .carousel-container .swiper-slide img {
   height: auto;
   width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .solution--reasons .reason-cta {
   border-radius: clamp(10px, 2.6666666667vw, 20px);

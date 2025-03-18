@@ -605,6 +605,7 @@
         align-items: center;
         width: vw(320);
         height: vw(200);
+        z-index: 10;
 
         @include media(sp) {
             bottom: vw(-100);
@@ -688,7 +689,8 @@
     padding: vw(138) 0 vw(60);
     background-image: url(../images/common/image_line.png);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-attachment: fixed;
+    will-change: transform;
     background-position: center calc(100% - vw(60));
 
     .solution--title {
@@ -722,6 +724,7 @@
         width: vw(355);
         margin-right: 0;
         margin-left: auto;
+        will-change: transform, opacity;
 
         &:nth-child(odd) {
             border-radius: 0 vw(20) vw(20) 0;
@@ -898,12 +901,13 @@
             }
 
             .swiper {
-                max-width: 500px;
+                will-change: transform;
             }
 
             .swiper-slide img {
                 height: auto;
                 width: 100%;
+                object-fit: cover;
             }
         }
 
