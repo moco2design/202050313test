@@ -58,11 +58,11 @@ $scale-factor: 2; // 390pxカンプの数値を2倍にする
 .wrapper {
   width: 100%;
   height: auto;
-  //background-image: url(../images/common/image_pcbg.png);
-  //background-repeat: no-repeat;
-  //background-size: cover;
-  //background-position: center center;
-  //background-attachment: fixed;
+  background-image: url(../images/common/image_pcbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
   padding: vw(40);
   position: relative;
 
