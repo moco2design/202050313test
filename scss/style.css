@@ -81,11 +81,6 @@ img {
 .wrapper {
   width: 100%;
   height: auto;
-  background-image: url(../images/common/image_pcbg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
   padding: clamp(40px, 10.6666666667vw, 80px);
   position: relative;
 }
