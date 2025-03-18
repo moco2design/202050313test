@@ -299,7 +299,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 trigger: target,
                 start: "top 75%",
                 toggleActions: "play none none none",
-                scrub: true
             }
         });
     });
