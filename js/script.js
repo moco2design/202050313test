@@ -151,36 +151,185 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-// カウントアップ
+//スクロールアニメーション
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
-    function animateCountUp() {
-        gsap.utils.toArray(".count-num").forEach(target => {
+    function fadeInAnimation(selector, options = {}) {
+        gsap.utils.toArray(selector).forEach(target => {
             gsap.fromTo(target, {
-                innerHTML: 0
+                autoAlpha: 0,
+                y: 10
             }, {
-                innerHTML: target.dataset.count || 2000, // `data-count` 属性の値 or デフォルト2000
-                duration: 1, // カウントアップの時間
-                ease: "power2.out",
+                autoAlpha: 1,
+                y: 0,
+                duration: options.duration || 0.6,
+                ease: options.ease || "power2.out",
                 scrollTrigger: {
                     trigger: target,
-                    start: "top 80%", // 画面の80%に達したら開始
+                    start: options.start || "bottom bottom",
                     toggleActions: "play none none none"
-                },
-                snap: {
-                    innerHTML: 1
-                }, // 数値を整数に丸める
-                onUpdate: function () {
-                    target.innerHTML = Math.floor(target.innerHTML); // 小数を防ぐ
                 }
             });
         });
     }
 
-    animateCountUp();
+    // **通常のフェードイン**
+    fadeInAnimation('.js-fadeIn');
+
+    // **早めのフェードイン（-soon）**
+    fadeInAnimation('.js-fadeIn-soon', {
+        start: "top 80%"
+    });
+
+    // **連続ポップアップ**
+    gsap.utils.toArray('.js-popUps').forEach(target => {
+        var items = target.querySelectorAll(':scope > *');
+
+        gsap.fromTo(items, {
+            scale: 0.9,
+            autoAlpha: 0,
+            y: 20
+        }, {
+            scale: 1,
+            autoAlpha: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.3,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: target,
+                start: "bottom bottom",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+
+    // **早めの連続ポップアップ（-soon）**
+    gsap.utils.toArray('.js-popUps-soon').forEach(target => {
+        var items = target.querySelectorAll(':scope > *');
+
+        gsap.fromTo(items, {
+            scale: 0.9,
+            autoAlpha: 0
+        }, {
+            scale: 1,
+            autoAlpha: 1,
+            ease: "power2.out",
+            stagger: {
+                each: 0.08
+            },
+            scrollTrigger: {
+                trigger: target,
+                start: "top 80%"
+            }
+        });
+    });
+
+    // **通常の左右フェードイン**
+    function sideFadeIn(selector, startPos = "bottom bottom") {
+        gsap.utils.toArray(selector).forEach(element => {
+            gsap.to(element, {
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: element,
+                    start: startPos,
+                    toggleActions: "play none none none"
+                }
+            });
+        });
+    }
+
+    sideFadeIn(".fadeInRight", "bottom bottom");
+    sideFadeIn(".fadeInLeft", "bottom bottom");
+
+    // **早めの左右フェードイン（-soon）**
+    gsap.utils.toArray(".fadeInRight-soon").forEach(element => {
+        gsap.to(element, {
+            opacity: 1,
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: element,
+                start: "top 50%",
+                toggleActions: "play none none none"
+            },
+            onComplete: () => {
+                element.style.transform = "none"; // **translateXを解除**
+            }
+        });
+    });
+
+    gsap.utils.toArray(".fadeInLeft-soon").forEach(element => {
+        gsap.to(element, {
+            opacity: 1,
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: element,
+                start: "top 50%",
+                toggleActions: "play none none none"
+            },
+            onComplete: () => {
+                element.style.transform = "none"; // **translateXを解除**
+            }
+        });
+    });
+
+    // **下からフェードイン**
+    fadeInAnimation(".fadeInUp");
+
+    // **早めのスライドアップ＆フェードイン（-soon）**
+    gsap.utils.toArray('.js-fadeInUp-soon').forEach(target => {
+        gsap.to(target, {
+            opacity: 1,
+            visibility: "visible",
+            y: 0,
+            duration: 0.8,
+            autoAlpha: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: target,
+                start: "top 75%",
+                toggleActions: "play none none none",
+            }
+        });
+    });
+
+    // **連続ポップイン（move）**
+    let items = gsap.utils.toArray(".js-popUps-move .solution--item");
+
+    gsap.fromTo(
+        items, {
+            autoAlpha: 0,
+            scale: 1,
+            x: (i) => (i % 2 === 0 ? -50 : 50),
+            y: 20
+        }, {
+            autoAlpha: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.2,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".js-popUps-move",
+                start: "top bottom",
+                toggleActions: "play none none none"
+            }
+        }
+    );
 });
+
+
 
 //帯アニメーション①
 document.addEventListener("DOMContentLoaded", function () {
