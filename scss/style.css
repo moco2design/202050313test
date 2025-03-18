@@ -715,6 +715,10 @@ footer {
   text-align: center;
 }
 
+.problem {
+  margin-bottom: clamp(-104px, -27.7333333333vw, -208px);
+}
+
 .problem-wrap {
   background-image: url("../images/common/image_nayami2.png");
   padding: clamp(32px, 8.5333333333vw, 64px) clamp(32px, 8.5333333333vw, 64px) clamp(60px, 16vw, 120px);

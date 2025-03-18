@@ -288,8 +288,9 @@ document.addEventListener("DOMContentLoaded", function () {
             ease: "power2.out",
             scrollTrigger: {
                 trigger: target,
-                start: "top 85%",
-                toggleActions: "play none none none"
+                start: "top 75%",
+                toggleActions: "play none none none",
+                scrub: true
             }
         });
     });
