@@ -813,7 +813,6 @@ footer {
           clip-path: polygon(0 0, 100% clamp(50px, 6vw, 100px), 100% 100%, 0 100%);
   position: relative;
   top: clamp(-100px, -26.6666666667vw, -200px);
-  margin-bottom: clamp(-100px, -26.6666666667vw, -200px);
 }
 @media (max-width: 600px) {
   .solution--wrap {
@@ -1072,6 +1071,7 @@ footer {
   text-align: left;
   position: relative;
   top: clamp(-104px, -27.7333333333vw, -208px);
+  margin-bottom: clamp(-104px, -27.7333333333vw, -208px);
 }
 .solution--jirei-bottom .solution--text {
   font-size: clamp(16px, 4.2666666667vw, 32px);

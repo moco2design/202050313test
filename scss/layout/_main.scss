@@ -101,7 +101,6 @@
     clip-path: polygon(0 0, 100% clamp(50px, 6vw, 100px), 100% 100%, 0 100%);
     position: relative;
     top: vw(-100);
-    margin-bottom: vw(-100);
 
     @include media(sp) {
         padding-top: vw(180);
@@ -381,6 +380,7 @@
     text-align: left;
     position: relative;
     top: vw(-104);
+    margin-bottom: vw(-104);
 
     .solution--text {
         font-size: vw(16);
