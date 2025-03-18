@@ -1146,8 +1146,8 @@ footer {
 /* jirei bottom */
 .solution--jirei-bottom {
   background-image: url("../images/common/image_hougan1.png");
-  background-size: contain;
-  padding: clamp(57px, 15.2vw, 114px) clamp(20px, 5.3333333333vw, 40px) clamp(110px, 29.3333333333vw, 220px);
+  background-size: cover;
+  padding: clamp(57px, 15.2vw, 114px) clamp(20px, 5.3333333333vw, 40px) clamp(140px, 37.3333333333vw, 280px);
   text-align: left;
   position: relative;
   top: clamp(-104px, -27.7333333333vw, -208px);
@@ -1424,6 +1424,7 @@ footer {
   background-attachment: fixed;
   will-change: transform;
   background-position: center calc(100% - clamp(60px, 16vw, 120px));
+  position: relative;
 }
 .solution--reasons .solution--title {
   font-size: clamp(20px, 5.3333333333vw, 40px);

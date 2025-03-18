@@ -375,8 +375,8 @@
 /* jirei bottom */
 .solution--jirei-bottom {
     background-image: url('../images/common/image_hougan1.png');
-    background-size: contain;
-    padding: vw(57) vw(20) vw(110);
+    background-size: cover;
+    padding: vw(57) vw(20) vw(140);
     text-align: left;
     position: relative;
     top: vw(-104);
@@ -692,6 +692,7 @@
     background-attachment: fixed;
     will-change: transform;
     background-position: center calc(100% - vw(60));
+    position: relative;
 
     .solution--title {
         font-size: vw(20);
