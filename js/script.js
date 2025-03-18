@@ -299,3 +299,174 @@ document.addEventListener("DOMContentLoaded", function () {
     observeStaggered(".js-popUps-soon > *", 80);
     observeStaggered(".js-popUps-move .solution--item", 200);
 });
+
+
+// SplitType & GSAP アニメーション
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initAnimation() {
+        // **すべての .split-text 要素を取得**
+        const splitElements = document.querySelectorAll(".split-text");
+
+        splitElements.forEach(element => {
+            // **既存の SplitType を削除し、新しく適用**
+            element.innerHTML = element.textContent;
+            const splitText = new SplitType(element, {
+                types: "chars"
+            });
+
+            let triggerStart = "top bottom"; // **発火タイミングを要素が画面下に入った瞬間に**
+
+            gsap.to(splitText.chars, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.02,
+                duration: 0.2,
+                ease: "power2.out",
+                startAt: {
+                    y: 50,
+                    opacity: 0
+                },
+                scrollTrigger: {
+                    trigger: element,
+                    start: triggerStart,
+                    toggleActions: "play none none reset", // **スクロールを戻したらリセット**
+                    once: true, // **スクロールを戻しても再実行**
+                    scrub: false, // **true にするとスクロールに応じて徐々に発火**
+                },
+                onComplete: function () {
+                    gsap.to(element, {
+                        "--border-width": "100%", // CSS変数を変更
+                        duration: 0.1,
+                        ease: "power2.out",
+                    });
+                }
+            });
+        });
+
+        // **スクロールトリガーをリフレッシュ**
+        ScrollTrigger.refresh();
+    }
+
+    // **初回実行**
+    initAnimation();
+
+    // **ウィンドウリサイズ時にアニメーションを再初期化**
+    window.addEventListener("resize", function () {
+        // **SplitType の再適用（リサイズ時に再分割）**
+        document.querySelectorAll(".split-text").forEach(element => {
+            element.innerHTML = element.textContent;
+        });
+        initAnimation();
+    });
+});
+
+//帯アニメーション①
+document.addEventListener("DOMContentLoaded", function () {
+    const ribbons = document.querySelectorAll(".text__ribbon");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const ribbon = entry.target;
+                ribbon.classList.add("active"); // **アニメーション開始**
+
+                // **0.2秒後に縮小アニメーション**
+                setTimeout(() => {
+                    ribbon.querySelector(".text__ribbon-bg").classList.add("shrink");
+                }, 200);
+
+                // **観察を終了**
+                observer.unobserve(ribbon);
+            }
+        });
+    }, {
+        threshold: 0.4
+    });
+
+    ribbons.forEach(ribbon => observer.observe(ribbon));
+});
+
+
+// 帯アニメーション②
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(".profile-detail");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const section = entry.target;
+                section.classList.add("active"); // **アニメーション開始**
+
+                // **0.4秒後に縮小アニメーション**
+                setTimeout(() => {
+                    section.querySelector(".text__first-bg").classList.add("shrink");
+                    section.querySelector(".text__second-bg").classList.add("shrink");
+                    section.querySelector(".text__third-bg").classList.add("shrink");
+                }, 400);
+
+                // **一度発火したら再観察しない**
+                observer.unobserve(section);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+
+    sections.forEach(section => observer.observe(section));
+});
+
+
+
+//帯アニメーション③
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // **初期状態を設定**
+    gsap.set([".bottom__first-bg", ".bottom__second-bg"], {
+        scaleX: 0
+    });
+    gsap.set(".bottom___word", {
+        opacity: 0
+    });
+    gsap.set(".bottom__white-bg", {
+        opacity: 0
+    });
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about-section-message", // 🔹 発火の基準となる要素
+            start: "top 75%", // 画面の75%に達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    tl.to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        // **`.bottom___word` の opacity を変更（アニメーション中に現れる）**
+        .to(".bottom___word", {
+            duration: 0.1,
+            opacity: 1,
+        }, "-=0.2") // 🔹 文字の表示を少し遅らせる
+        // **背景を閉じる**
+        .to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        // **`.bottom__white-bg` を表示して、文字の背景として残す**
+        .to(".bottom__white-bg", {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `.bottom__first-bg` の閉じる動きと同時に発火
+});

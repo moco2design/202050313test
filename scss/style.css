@@ -167,31 +167,37 @@ footer {
   transition: transfrom 0.5s;
 }
 
+/*帯１*/
+/* リボン全体のコンテナ */
 .text__ribbon {
   position: relative;
   display: inline-block;
-  /* テキスト幅に合わせる */
 }
 
+/* テキスト（初期状態：非表示） */
 .text__ribbon-item {
   opacity: 0;
   position: relative;
   z-index: 5;
   display: inline-block;
+  transition: opacity 0.2s ease-in-out;
 }
 
+/* 白い帯（初期状態：縮小） */
 .text__ribbon-bg {
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  transform-origin: left;
-  transform: scaleX(0);
   background-color: #fff;
   z-index: 10;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
 }
 
+/* 黄色い背景（初期状態：非表示） */
 .white-bg {
   position: absolute;
   width: 100%;
@@ -199,11 +205,96 @@ footer {
   background-color: #F8E538;
   left: 0;
   top: 0;
-  transform-origin: left;
   opacity: 0;
   z-index: 2;
+  transition: opacity 0.2s ease-in-out;
 }
 
+/* アニメーション開始時のクラス */
+.text__ribbon.active .text__ribbon-bg {
+  transform: scaleX(1);
+}
+
+.text__ribbon.active .text__ribbon-item {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.text__ribbon.active .text__ribbon-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.3s;
+}
+
+.text__ribbon.active .white-bg {
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/*帯2*/
+.text__first,
+.text__second,
+.text__third {
+  position: relative;
+}
+
+.text__word {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* 白い帯（初期状態: 縮小） */
+.text__first-bg,
+.text__second-bg,
+.text__third-bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  z-index: 100;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.15s ease-in-out;
+}
+
+/* アニメーション開始時 */
+.profile-detail.active .text__first-bg {
+  transform: scaleX(1);
+}
+
+.profile-detail.active .text__second-bg {
+  transform: scaleX(1);
+  transition-delay: 0.1s;
+}
+
+.profile-detail.active .text__third-bg {
+  transform: scaleX(1);
+  transition-delay: 0.2s;
+}
+
+.profile-detail.active .text__word {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+.profile-detail.active .text__first-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.4s;
+}
+
+.profile-detail.active .text__second-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.5s;
+}
+
+.profile-detail.active .text__third-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.6s;
+}
+
+/*帯３*/
 .bottom__white-bg {
   position: absolute;
   width: 100%;
@@ -217,43 +308,14 @@ footer {
   transform: skew(-10deg);
 }
 
-.text__first,
-.text__second,
-.text__third,
-.bottom__first,
-.bottom__second {
-  position: relative;
-}
-
-.text__word,
-.bottom___word {
-  opacity: 0;
-}
-
 .bottom___word {
   position: relative;
   z-index: 10;
   padding: 0 clamp(16px, 4.2666666667vw, 32px);
 }
 
-.text__first-bg,
-.text__second-bg,
-.text__third-bg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  transform-origin: left;
-  transform: scaleX(0);
-}
-
-.text__first-bg,
-.text__second-bg,
-.text__third-bg {
-  background-color: #fff;
+.bottom___word {
+  opacity: 0;
 }
 
 .about-section-message .bottom__first-bg,
