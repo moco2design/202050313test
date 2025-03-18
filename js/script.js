@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     trigger: element,
                     start: triggerStart,
                     toggleActions: "play none none reset", // **スクロールを戻したらリセット**
-                    once: false, // **スクロールを戻しても再実行**
+                    once: true, // **スクロールを戻しても再実行**
                     scrub: false, // **true にするとスクロールに応じて徐々に発火**
                 },
                 onComplete: function () {
@@ -359,7 +359,147 @@ document.addEventListener("DOMContentLoaded", function () {
     animateCountUp();
 });
 
+//帯アニメーション①
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
 
+    var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".text__ribbon",
+            start: "top 80%", // `.text__ribbon` が画面の80%に到達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    var firstBg = document.querySelectorAll('.text__ribbon-bg'), // 最初の帯
+        word = document.querySelectorAll('.text__ribbon-item'), // テキスト
+        whiteBg = document.querySelectorAll('.white-bg'); // 文字の背景として残す
+
+    tl.to(firstBg, {
+            duration: 0.2, // 背景の拡張を少し遅く
+            scaleX: 1,
+        })
+
+        // 文字の不透明度を 0 のままにして、`firstBg` が隠れている状態で出現
+        .set(word, {
+            opacity: 1
+        })
+
+        // 背景を閉じる（`firstBg` のみ閉じる）+ `whiteBg` 同時スライドイン
+        .to(firstBg, {
+            duration: 0.3,
+            scaleX: 0,
+        })
+
+        .to(whiteBg, {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `firstBg` の閉じる動きと同時に `whiteBg` を表示
+});
+
+// 帯アニメーション②
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // **`.text__first-bg` などの初期状態を明示的に指定**
+    gsap.set([".text__first-bg", ".text__second-bg", ".text__third-bg"], {
+        scaleX: 0
+    });
+
+    gsap.set(".text__word", {
+        opacity: 0
+    });
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".profile-detail", // 🔹 発火の基準となる要素
+            start: "top 75%", // 画面の75%に達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    tl.to(".text__first-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__second-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__third-bg", {
+            duration: 0.1,
+            scaleX: 1,
+        })
+        .to(".text__word", {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.2") // 🔹 文字の表示を少し遅らせる
+        .to(".text__first-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".text__second-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".text__third-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        });
+});
+
+
+//帯アニメーション③
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // **初期状態を設定**
+    gsap.set([".bottom__first-bg", ".bottom__second-bg"], {
+        scaleX: 0
+    });
+    gsap.set(".bottom___word", {
+        opacity: 0
+    });
+    gsap.set(".bottom__white-bg", {
+        opacity: 0
+    });
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about-section-message", // 🔹 発火の基準となる要素
+            start: "top 75%", // 画面の75%に達したら発火
+            toggleActions: "play none none none",
+        }
+    });
+
+    tl.to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 1,
+        })
+        // **`.bottom___word` の opacity を変更（アニメーション中に現れる）**
+        .to(".bottom___word", {
+            duration: 0.1,
+            opacity: 1,
+        }, "-=0.2") // 🔹 文字の表示を少し遅らせる
+        // **背景を閉じる**
+        .to(".bottom__first-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        .to(".bottom__second-bg", {
+            duration: 0.2,
+            scaleX: 0,
+        })
+        // **`.bottom__white-bg` を表示して、文字の背景として残す**
+        .to(".bottom__white-bg", {
+            duration: 0.2,
+            opacity: 1,
+        }, "-=0.5"); // `.bottom__first-bg` の閉じる動きと同時に発火
+});
 
 
 // SVG アニメーション
