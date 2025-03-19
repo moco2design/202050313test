@@ -1,0 +1,26 @@
+@mixin media($breakpoint) {
+  @if $breakpoint == sp {
+    @media (max-width: 600px) { @content; }
+  } @else if $breakpoint == tab {
+    @media (min-width: 601px) and (max-width: 1024px) { @content; }
+  } @else if $breakpoint == pc {
+    @media (min-width: 1025px) { @content; }
+  }
+}
+
+/* 使用例 */
+// .container {
+//   width: 100%;
+
+//   @include media(sp) {
+//     background-color: lightblue;
+//   }
+
+//   @include media(tab) {
+//     background-color: lightgreen;
+//   }
+
+//   @include media(pc) {
+//     background-color: lightgray;
+//   }
+// }

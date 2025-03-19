@@ -1,0 +1,88 @@
+/*今すぐテンプレ集を購入する　ボタン*/
+.btn-cta {
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .monthly-sales {
+        font-size: vw(18);
+        font-weight: bold;
+        border: 1px solid #F1B234;
+        width: vw(200);
+        height: vw(24);
+        color: #E0A630;
+        font-size: vw(14);
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-inline: auto;
+        position: relative;
+        z-index: 10;
+
+        span {
+            font-family: 'Roboto';
+            font-weight: 700;
+            font-size: vw(22);
+            color: #F1B234;
+            transform: matrix(1, 0, -0.17, 0.98, 0, 0);
+            display: inline-block;
+        }
+    }
+
+    .buy-button {
+        width: vw(348);
+        height: vw(70);
+        background: linear-gradient(180deg, #F9B836 0%, #D49D2D 100%);
+        border-radius: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: vw(20);
+        font-weight: bold;
+        position: relative;
+        top: vw(-12);
+        margin-bottom: vw(-12);
+        margin-inline: auto;
+
+        &::after {
+            content: "";
+            background-image: url(../images/common/btn-right.svg);
+            display: inline-block;
+            width: vw(8);
+            height: vw(16);
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-left: vw(12);
+        }
+
+    }
+}
+
+.puyon {
+    animation: puyon 3s ease-in-out infinite;
+}
+
+@keyframes puyon {
+    0% {
+        transform: scale(1.0);
+    }
+
+    25% {
+        transform: scale(1.03);
+    }
+
+    50% {
+        transform: scale(0.97);
+    }
+
+    75% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}

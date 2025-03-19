@@ -1,0 +1,407 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: "Noto Sans", sans-serif;
+  color: #333;
+  letter-spacing: .05em;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition-duration: .4s;
+
+
+  &:hover {
+    transform: translateY(2px);
+    box-shadow: 0px 2px 5px #463206;
+  }
+
+  @media screen and (max-width: 1024px) {
+    &:hover {
+      transform: unset;
+      box-shadow: unset;
+    }
+  }
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+$min-width: 390px; // 最小ビューポート幅
+$max-width: 750px; // 最大ビューポート幅
+$scale-factor: 2; // 390pxカンプの数値を2倍にする
+
+// px の単位を削除する関数
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function vw($px) {
+
+  // `clamp()` を含んでいる場合はそのまま返す
+  @if str-index(inspect($px), "clamp") {
+    @return $px;
+  }
+
+  // 単位なしの数値なら px を付与
+  @if unitless($px) {
+    $px: $px * 1px;
+  }
+
+  $base-size: $px * $scale-factor; // 390pxカンプの値を2倍
+  $vw-value: #{strip-unit($base-size) / strip-unit($max-width) * 100}vw;
+
+  @return clamp(#{$px}, #{$vw-value}, #{$base-size});
+}
+
+
+.wrapper {
+  width: 100%;
+  height: auto;
+  padding: vw(40);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url(../images/common/image_pcbg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    z-index: -1;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 0;
+  }
+
+  .wrapper-cta {
+    position: fixed;
+    top: 50%;
+    right: vw(50);
+    transform: translateY(-50%);
+
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+
+
+    .buy-button {
+      width: vw(80);
+      height: vw(80);
+      background: linear-gradient(180deg, #F9B836 0%, #D49D2D 100%);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: vw(12);
+      font-weight: bold;
+      text-align: center;
+      padding-top: vw(10);
+      line-height: 1.2;
+
+      &::after {
+        content: "";
+        background-image: url(../images/common/btn-right.svg);
+        display: inline-block;
+        width: vw(8);
+        height: vw(16);
+        background-repeat: no-repeat;
+        background-size: contain;
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+
+.container,
+footer {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.fz--20 {
+  font-size: vw(20);
+}
+
+.fz--24 {
+  font-size: vw(24);
+}
+
+.fz--32 {
+  font-size: vw(32);
+}
+
+.fz--34 {
+  font-size: vw(34);
+}
+
+.is--block {
+  display: block;
+}
+
+/*animation*/
+.char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/*帯１*/
+/* リボン全体のコンテナ */
+.text__ribbon {
+  position: relative;
+  display: inline-block;
+}
+
+/* テキスト（初期状態：非表示） */
+.text__ribbon-item {
+  position: relative;
+  z-index: 5;
+  display: inline-block;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* 白い帯（初期状態：縮小） */
+.text__ribbon-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* 黄色い背景（初期状態：非表示） */
+.white-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #F8E538;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  z-index: 2;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* アニメーション開始時のクラス */
+.text__ribbon.active .text__ribbon-bg {
+  transform: scaleX(1);
+}
+
+.text__ribbon.active .text__ribbon-item {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.text__ribbon.active .text__ribbon-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.3s;
+}
+
+.text__ribbon.active .white-bg {
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/*帯2*/
+.text__first,
+.text__second,
+.text__third {
+  position: relative;
+}
+
+
+/* 白い帯（初期状態: 縮小） */
+.text__first-bg,
+.text__second-bg,
+.text__third-bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  z-index: 100;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.15s ease-in-out;
+}
+
+/* アニメーション開始時 */
+.profile-detail.active .text__first-bg {
+  transform: scaleX(1);
+}
+
+.profile-detail.active .text__second-bg {
+  transform: scaleX(1);
+  transition-delay: 0.1s;
+}
+
+.profile-detail.active .text__third-bg {
+  transform: scaleX(1);
+  transition-delay: 0.2s;
+}
+
+.profile-detail.active .text__word {
+  opacity: 1;
+  transition-delay: 0.3s;
+  position: relative;
+  z-index: 10;
+}
+
+.profile-detail.active .text__first-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.4s;
+}
+
+.profile-detail.active .text__second-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.5s;
+}
+
+.profile-detail.active .text__third-bg.shrink {
+  transform: scaleX(0);
+  transition-delay: 0.6s;
+}
+
+/*帯３*/
+.bottom__white-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  transform-origin: left;
+  opacity: 0;
+  z-index: 2;
+  transform: skew(-10deg); // 平行四辺形に傾ける
+
+}
+
+.bottom___word {
+  position: relative;
+  z-index: 10;
+  padding: 0 vw(16);
+}
+
+.about-section-message {
+
+  .bottom__first-bg,
+  .bottom__second-bg {
+    z-index: 20;
+    background-color: #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    transform-origin: left;
+    transform: skew(-10deg); // 平行四辺形に傾ける
+  }
+}
+
+
+.popup-box {
+  animation: popup 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes popup {
+  0% {
+    transform: translateY(40px) scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1.0);
+  }
+
+  80%,
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+/* フェードインの共通設定 */
+.fadeIn,
+.fadeInUp,
+.fadeInRight,
+.fadeInLeft,
+.js-popUps>*,
+.js-popUps-soon>*,
+.js-popUps-move .solution--item {
+  opacity: 1;
+}
+
+
+/* 下からフェードイン */
+.fadeInUp {
+  transform: translateY(20px);
+}
+
+.fadeInUp.active {
+  transform: translateY(0);
+}
+
+/* 右からフェードイン */
+.fadeInRight {
+  transform: translateX(50px);
+}
+
+.fadeInRight.active {
+  transform: translateX(0);
+}
+
+/* 左からフェードイン */
+.fadeInLeft {
+  transform: translateX(-50px);
+}
+
+.fadeInLeft.active {
+  transform: translateX(0);
+}
+
+/* スライドアップ（ポップアップ） */
+.js-popUps>*,
+.js-popUps-soon>*,
+.js-popUps-move .solution--item {
+  transform: scale(0.9) translateY(20px);
+}
+
+.js-popUps>*.active,
+.js-popUps-soon>*.active,
+.js-popUps-move .solution--item.active {
+  transform: scale(1) translateY(0);
+}
