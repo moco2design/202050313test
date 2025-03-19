@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
     swiperConfigs.forEach(config => {
         const swiperInstance = new Swiper(config.selector, {
             loop: true,
-            speed: 1500,
             autoplay: false,
             pagination: {
                 el: config.pagination,
