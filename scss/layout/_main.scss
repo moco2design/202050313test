@@ -197,6 +197,8 @@
         display: inline-block;
         transform: matrix(1, 0, -0.17, 0.98, 0, 0);
         letter-spacing: 0;
+        position: relative;
+        top: vw(4);
     }
 
     .highlight-blue {
@@ -707,6 +709,7 @@
     will-change: transform;
     background-position: center calc(100% - vw(60));
     position: relative;
+    background-size: contain;
 
     .solution--title {
         font-size: vw(20);

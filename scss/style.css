@@ -580,6 +580,8 @@ footer {
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   letter-spacing: 0;
+  position: relative;
+  top: clamp(4px, 1.0666666667vw, 8px);
 }
 .hero--inner h1 .highlight--blue-bk {
   font-weight: 700;
@@ -1022,6 +1024,8 @@ footer {
   display: inline-block;
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   letter-spacing: 0;
+  position: relative;
+  top: clamp(4px, 1.0666666667vw, 8px);
 }
 .problem-expert .highlight-blue {
   color: #0577FB;
@@ -1475,6 +1479,7 @@ footer {
   will-change: transform;
   background-position: center calc(100% - clamp(60px, 16vw, 120px));
   position: relative;
+  background-size: contain;
 }
 .solution--reasons .solution--title {
   font-size: clamp(20px, 5.3333333333vw, 40px);
