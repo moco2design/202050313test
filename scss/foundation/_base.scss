@@ -83,6 +83,10 @@ $scale-factor: 2; // 390pxカンプの数値を2倍にする
     background-size: cover;
     background-position: center center;
     z-index: -1;
+
+    @media screen and (max-width: 767px) {
+      background-image: none;
+    }
   }
 
   @media screen and (max-width: 1024px) {

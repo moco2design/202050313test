@@ -105,6 +105,11 @@ img {
   background-position: center center;
   z-index: -1;
 }
+@media screen and (max-width: 767px) {
+  .wrapper::before {
+    background-image: none;
+  }
+}
 @media screen and (max-width: 1024px) {
   .wrapper {
     padding: 0;
