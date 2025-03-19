@@ -104,7 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("All Swipers initialized successfully!");
 });
 
-
 //voice-carousel
 document.addEventListener("DOMContentLoaded", function () {
     var mySwiper = new Swiper('.swiper-container', {
@@ -333,6 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             const chars = element.querySelectorAll(".char"); // **アニメーション対象の文字**
+            const highlightBefore = element.querySelector(".highlight::before"); // **before 要素を取得**
 
             // **IntersectionObserver で監視**
             const observer = new IntersectionObserver(entries => {
@@ -349,6 +349,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         setTimeout(() => {
                             element.style.setProperty("--border-width", "100%");
                         }, chars.length * 20);
+
+                        // **最後の文字が表示された後に before を表示**
+                        setTimeout(() => {
+                            element.querySelector(".highlight").classList.add("show-before");
+                        }, chars.length * 20 + 100); // **少し遅らせる**
 
                         observer.unobserve(entry.target); // **1回のみ実行**
                     }
