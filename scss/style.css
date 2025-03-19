@@ -161,16 +161,16 @@ footer {
   font-size: clamp(20px, 5.3333333333vw, 40px);
 }
 
-.fz--24 {
-  font-size: clamp(24px, 6.4vw, 48px);
-}
-
 .fz--32 {
   font-size: clamp(32px, 8.5333333333vw, 64px);
 }
 
 .fz--34 {
   font-size: clamp(34px, 9.0666666667vw, 68px);
+}
+
+.fz--36 {
+  font-size: clamp(36px, 9.6vw, 72px);
 }
 
 .is--block {
@@ -568,6 +568,7 @@ footer {
   white-space: nowrap;
   text-align: left;
   font-family: "Noto Sans";
+  font-feature-settings: "palt";
 }
 .hero--inner h1 .fz--24 {
   color: #000;
@@ -586,16 +587,33 @@ footer {
   line-height: 1;
   color: #FFFFFF;
   background-color: #0577FB;
-  padding: 0 clamp(1px, 0.2666666667vw, 2px);
+  padding: clamp(3px, 0.8vw, 6px) clamp(1px, 0.2666666667vw, 2px) 0;
   display: inline-block;
   height: clamp(37px, 9.8666666667vw, 74px);
+  display: inline-block;
+  margin-right: 2px;
 }
-.hero--inner h1 .fz--34:last-of-type {
+@media (max-width: 600px) {
+  .hero--inner h1 .highlight--blue-bk {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+.hero--inner h1 .fz--36 {
   color: #0577FB;
+  display: inline-block;
+  margin-bottom: clamp(20px, 5.3333333333vw, 40px);
+  margin-top: clamp(-30px, -8vw, -60px);
+}
+@media (max-width: 600px) {
+  .hero--inner h1 .fz--36 {
+    margin-top: clamp(-15px, -4vw, -30px);
+    margin-bottom: clamp(10px, 2.6666666667vw, 20px);
+  }
 }
 .hero--inner h1 .img--pawerpoint {
-  width: clamp(69.17px, 18.4453333333vw, 138.34px);
-  height: clamp(63px, 16.8vw, 126px);
+  width: clamp(53.83px, 14.3546666667vw, 107.66px);
+  height: clamp(49.03px, 13.0746666667vw, 98.06px);
   position: relative;
   top: clamp(-15px, -4vw, -30px);
 }
@@ -603,6 +621,7 @@ footer {
   .hero--inner h1 .img--pawerpoint {
     width: clamp(53.83px, 14.3546666667vw, 107.66px);
     height: clamp(49.03px, 13.0746666667vw, 98.06px);
+    top: clamp(-7px, -1.8666666667vw, -14px);
   }
 }
 
@@ -803,6 +822,15 @@ footer {
   text-align: center;
 }
 
+.sale-top {
+  margin-top: clamp(-88px, -23.4666666667vw, -176px);
+}
+@media (max-width: 600px) {
+  .sale-top {
+    margin-top: clamp(-44px, -11.7333333333vw, -88px);
+  }
+}
+
 .problem {
   margin-bottom: clamp(-104px, -27.7333333333vw, -208px);
 }
@@ -904,7 +932,7 @@ footer {
 }
 @media (max-width: 600px) {
   .solution--wrap {
-    padding-top: clamp(180px, 48vw, 360px);
+    padding-top: clamp(150px, 40vw, 300px);
   }
 }
 .solution--wrap .solution--inner {
@@ -1070,7 +1098,7 @@ footer {
   padding: clamp(7px, 1.8666666667vw, 14px);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: clamp(2px, 0.5333333333vw, 4px);
   width: 100%;
   text-align: center;
@@ -1457,7 +1485,7 @@ footer {
   color: #000;
   border-radius: clamp(20px, 5.3333333333vw, 40px) 0 0 clamp(20px, 5.3333333333vw, 40px);
   padding: clamp(32px, 8.5333333333vw, 64px) clamp(26px, 6.9333333333vw, 52px);
-  margin-bottom: clamp(22px, 5.8666666667vw, 44px);
+  margin-bottom: clamp(47px, 12.5333333333vw, 94px);
   text-align: left;
   width: clamp(355px, 94.6666666667vw, 710px);
   margin-right: 0;
@@ -1558,6 +1586,12 @@ footer {
 .solution--reasons .reason .slide-content .slide-grid ul li {
   font-size: clamp(10px, 2.6666666667vw, 20px);
   margin-bottom: clamp(2px, 0.5333333333vw, 4px);
+}
+@media (max-width: 600px) {
+  .solution--reasons .reason .slide-content .slide-grid ul li {
+    white-space: nowrap;
+    font-size: 9.5px;
+  }
 }
 .solution--reasons .reason .carousel-container {
   position: relative;
@@ -1980,6 +2014,10 @@ footer {
   color: #0577FB;
 }
 
+#nomal .price-desc .highlight {
+  color: #0577FB;
+}
+
 .sales-info {
   text-align: center;
 }
@@ -2036,7 +2074,6 @@ footer {
 }
 #sale.cta-section .price-section {
   padding: clamp(60px, 16vw, 120px) clamp(15px, 4vw, 30px) clamp(30px, 8vw, 60px);
-  margin-bottom: clamp(30px, 8vw, 60px);
   border: clamp(2px, 0.5333333333vw, 4px) solid #FC3D40;
   position: relative;
 }
@@ -2231,6 +2268,9 @@ footer {
   padding-bottom: clamp(6px, 1.6vw, 12px);
   margin-bottom: clamp(17px, 4.5333333333vw, 34px);
   --border-width: 0%;
+}
+#sale.cta-section .price-section .price-desc .highlight {
+  color: #DC4B2C;
 }
 #sale.cta-section .price-section .price-desc::after {
   content: "";

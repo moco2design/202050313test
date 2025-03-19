@@ -103,7 +103,7 @@
     top: vw(-100);
 
     @include media(sp) {
-        padding-top: vw(180);
+        padding-top: vw(150);
     }
 
     .solution--inner {
@@ -275,7 +275,7 @@
                 padding: vw(7);
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
                 gap: vw(2);
                 width: 100%;
                 text-align: center;
@@ -720,7 +720,7 @@
         color: #000;
         border-radius: vw(20) 0 0 vw(20);
         padding: vw(32) vw(26);
-        margin-bottom: vw(22);
+        margin-bottom: vw(47);
         text-align: left;
         width: vw(355);
         margin-right: 0;
@@ -824,6 +824,11 @@
                     li {
                         font-size: vw(10);
                         margin-bottom: vw(2);
+
+                        @include media(sp) {
+                            white-space: nowrap;
+                            font-size: 9.5px;
+                        }
                     }
                 }
             }
@@ -1300,6 +1305,10 @@
     }
 }
 
+#nomal .price-desc .highlight {
+    color: #0577FB;
+}
+
 .sales-info {
     text-align: center;
 
@@ -1363,7 +1372,6 @@
 
     .price-section {
         padding: vw(60) vw(15) vw(30);
-        margin-bottom: vw(30);
         border: vw(2) solid #FC3D40;
         position: relative;
 
@@ -1571,6 +1579,10 @@
             position: relative;
             padding-bottom: vw(6);
             margin-bottom: vw(17);
+
+            .highlight {
+                color: #DC4B2C;
+            }
 
             --border-width: 0%;
 

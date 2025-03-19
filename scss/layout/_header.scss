@@ -92,6 +92,7 @@
         white-space: nowrap;
         text-align: left;
         font-family: "Noto Sans";
+        font-feature-settings: "palt";
 
         .fz--24 {
             color: #000;
@@ -112,24 +113,40 @@
             line-height: 1;
             color: #FFFFFF;
             background-color: #0577FB;
-            padding: 0 vw(1);
+            padding: vw(3) vw(1) 0;
             display: inline-block;
             height: vw(37);
+            display: inline-block;
+            margin-right: 2px;
+
+            @include media(sp) {
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
         }
 
-        .fz--34:last-of-type {
+        .fz--36 {
             color: #0577FB;
+            display: inline-block;
+            margin-bottom: vw(20);
+            margin-top: vw(-30);
+
+            @include media(sp) {
+                margin-top: vw(-15);
+                margin-bottom: vw(10);
+            }
         }
 
         .img--pawerpoint {
-            width: vw(69.17);
-            height: vw(63);
+            width: vw(53.83);
+            height: vw(49.03);
             position: relative;
             top: vw(-15);
 
             @include media(sp) {
                 width: vw(53.83);
                 height: vw(49.03);
+                top: vw(-7);
             }
         }
     }
@@ -346,4 +363,12 @@
     padding: vw(10);
     font-size: vw(9);
     text-align: center;
+}
+
+.sale-top {
+    margin-top: vw(-88);
+
+    @include media(sp) {
+        margin-top: vw(-44);
+    }
 }
