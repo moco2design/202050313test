@@ -1025,7 +1025,7 @@ footer {
   transform: matrix(1, 0, -0.17, 0.98, 0, 0);
   letter-spacing: 0;
   position: relative;
-  top: clamp(4px, 1.0666666667vw, 8px);
+  top: clamp(3px, 0.8vw, 6px);
 }
 .problem-expert .highlight-blue {
   color: #0577FB;
