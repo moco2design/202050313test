@@ -455,10 +455,14 @@ footer {
 /*==============================================================
 / CTA出し分
 /==============================================================*/
-#nomal.is--hide {
-  display: none;
+#nomal {
+  .is--hide {
+    display: none;
+  }
 }
 
-#sale.is--hide {
-  display: none;
+#sale {
+  .is--hide {
+    display: none;
+  }
 }

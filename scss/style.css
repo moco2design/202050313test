@@ -459,6 +459,17 @@ footer {
   transform: scale(1) translateY(0);
 }
 
+/*==============================================================
+/ CTA出し分
+/==============================================================*/
+#nomal .is--hide {
+  display: none;
+}
+
+#sale .is--hide {
+  display: none;
+}
+
 .footer {
   padding: clamp(20px, 5.3333333333vw, 40px);
 }
