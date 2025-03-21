@@ -456,13 +456,13 @@ footer {
 / CTA出し分
 /==============================================================*/
 #nomal {
-  .is--hide {
+  &.is--hide {
     display: none;
   }
 }
 
 #sale {
-  .is--hide {
+  &.is--hide {
     display: none;
   }
 }
